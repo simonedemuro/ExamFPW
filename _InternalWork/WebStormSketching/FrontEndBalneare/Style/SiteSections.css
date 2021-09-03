@@ -1,0 +1,28 @@
+.card-registration {
+    /* centered registration form */
+    display: flex;
+    justify-content: center;
+}
+/*Todo: media query qua*/
+.card-registration > div {
+    flex-basis: 50%;
+    overflow: hidden;
+}
+.card-registration .registration-form {
+}
+.lbl-full-width {
+    /* prende intera larghezza */
+    display: inline-block;
+    width: 100%;
+}
+.registration-form-submit {
+    display: flex;
+    justify-content: center;
+}
+.registration-form-submit > input {
+    flex: 1;
+    margin-top: 0px;
+    margin-right: 2px;
+    margin-left: 2px;
+    margin-bottom: 0px;
+}

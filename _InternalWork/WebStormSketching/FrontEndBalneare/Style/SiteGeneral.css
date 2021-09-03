@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+}
+::placeholder{
+    color: rgba(255, 255, 255,0.5);
+    font-weight:lighter;
+    font-size: 1.2em;
+}
+body {
+    background-color: #00719c ;
+    /* Impostazione font per intero sito */
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
+/* Todo: su dispositivi piccoli metti width 100% */
+input[type=submit] {
+    border: none;
+    color: white;
+    background-color: #10E7D0;
+    padding: 15px 32px;
+    display: inline-block;
+    font-size: 1.2em;
+}
+input[type=reset] {
+    border: none;
+    color: white;
+    background-color: #F79E02;
+    padding: 15px 32px;
+    display: inline-block;
+    font-size: 1.2em;
+}
+input[type=text],
+input[type=password],
+input[type=date],
+input[type=email],
+input[type=tel] {
+    width: 100%; /* per mandare a capo senza <br> */
+    background-color: rgba(255,255,255,0.05); /* sfondo selezione trasparente ma un po piu chiaro */
+    border-radius: 0.5em; /* bordo lievemente smussato */
+
+    /* Più grande e spazioso */
+    padding: 10px 15px;
+    margin: 10px 0;
+
+    /* Effetto sottolineatura arancione (complementare) */
+    border: none;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #F79E02;
+
+    /* Testo bianco: coerente ed elegante */
+    color: white;
+}
+input[type=text]:hover,
+input[type=password]:hover,
+input[type=date]:hover,
+input[type=email]:hover,
+input[type=tel]:hover {
+    background-color: rgba(255, 255, 255,0.2);
+}
+input[type=text]:focus-visible,
+input[type=password]:focus-visible,
+input[type=date]:focus-visible,
+input[type=email]:focus-visible,
+input[type=tel]:focus-visible{
+    /* evita la comparsa di un alone bruttissimo quando si clicca il campo */
+    outline: none;
+    /* ingrandisco la sottolineatura per dare evidenza si sia cliccato */
+    border-bottom-width: 4px;
+    background-color: rgba(255, 255, 255,0.2);
+    /* Effetto Zoom! */
+    font-size: 1.1em;
+}
+input[type=radio] {
+    /* Più grande e spazioso */
+    margin: 0 5px 15px 20px;
+    width: 1.4em;
+    height: 1.4em;
+}
+input[type=text]:invalid{
+    /* magari meglio al submit.. */
+}
+/* Todo: Mediaquery the width! */
+.site {
+    margin: auto; /* Center the main div */
+    border: 3px solid rgba(255,255,255,0.1); /* change .01 alpha to something else then*/
+    padding: 20px;
+    background-color: #009bd6;/*#1B9CE5;*/
+
+    /* Flexbox layout */
+    display: flex;
+    min-height: 50vh;
+    flex-direction: column;
+    width: 70%;
+}
+nav {
+
+}
+main {
+    display: flex;
+    flex-direction: row;
+}
+main > section, main > article {
+    flex: 1;
+    /*min-height: 60vh;*/
+}
+header, footer {
+    height: 15vh;
+}
+header, footer, section, article, nav {
+    border: 3px solid rgba(255,255,255,0.1); /* change .01 alpha to something else then*/
+    /* Everyone feels better with a bit of padding */
+    background: #00b8ff; /*#6CDAEE;*/
+    padding: 1em;
+    margin-bottom: 1em;
+}
