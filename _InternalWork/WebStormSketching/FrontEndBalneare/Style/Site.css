@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: rgb(244,62,0);
+}
+.site {
+    margin: auto; /* Center the main div */
+    border: 3px solid rgba(255,255,255,0.1); /* change .01 alpha to something else then*/
+    padding: 20px;
+    background-color: rgb(255,86,2);
+
+    /* Flexbox layout */
+    display: flex;
+    min-height: 50vh;
+    flex-direction: column;
+    width: 70%;
+    /* margin: 0; */
+}
+nav {
+
+}
+main {
+    display: flex;
+    flex-direction: row;
+}
+main > article {
+    flex: 4;
+    /*min-height: 60vh;*/
+}
+header, footer {
+    height: 15vh;
+}
+header, footer, article, nav {
+    border: 3px solid rgba(255,255,255,0.1); /* change .01 alpha to something else then*/
+    /* Everyone feels better with a bit of padding */
+    background: rgb(255,123,70);
+    padding: 1em;
+    margin-bottom: 1em;
+}
