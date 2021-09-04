@@ -138,8 +138,6 @@ nav {
 
 }
 main {
-    display: flex;
-    flex-direction: row;
 }
 main > section, main > article {
     flex: 1;

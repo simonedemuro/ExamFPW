@@ -30,15 +30,13 @@ and open the template in the editor.
 }
 .registration-form-submit > input {
     flex: 1;
-    margin-top: 0px;
-    margin-right: 2px;
-    margin-left: 2px;
-    margin-bottom: 0px;
+    margin: 0 2px;
 }
 .card-login {
 }
 .card-login .form-login-surround {
     display: flex;
+    align-items: center;
 }
 .card-login .form-login-surround ._2_3-form {
     flex: 1;
@@ -47,6 +45,19 @@ and open the template in the editor.
 .card-login .form-login-surround ._1_3-form {
     margin: 0 10px 0 5px;
 }
-._1_3-form input[type=submit] {
-    margin-top: 10%;
+.card-login #msg-signup {
+    text-align: right;
+    margin: 0 10px 0 0;
+}
+.card-login a {
+    color: white;
+    font-weight: bold;
+}
+.card-login a:hover {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.card-login #from-login {
+    margin-bottom: 5px;
 }

@@ -35,7 +35,7 @@ Author     : fpw
     <nav>Nav</nav>
     <main>
         <section class="card-login">
-            <form id="from-login">
+            <form id="from-login" action="login" method="post">
                 <div class="form-login-surround">
                     <div class="_2_3-form">
                         <label for="Fuser">Username: </label>
@@ -58,6 +58,7 @@ Author     : fpw
                     </div>
                 </div>
             </form>
+            <p id="msg-signup"> se non hai ancora un account <a href="/Registration.jsp">Registrati</a> </p>
         </section>
     </main>
     <footer>Footer</footer>
