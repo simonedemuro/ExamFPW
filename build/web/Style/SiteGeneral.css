@@ -26,18 +26,26 @@ body {
 input[type=submit] {
     border: none;
     color: white;
-    background-color: #10E7D0;
+    background-color: rgba(16, 231, 208, 0.75); /* alpha cosi quando passi sopra diventa acceso */
     padding: 15px 32px;
     display: inline-block;
     font-size: 1.2em;
 }
+input[type=submit]:hover {
+    background-color: #10E7D0;
+    font-size: 1.3em;
+}
 input[type=reset] {
     border: none;
     color: white;
-    background-color: #F79E02;
+    background-color: rgba(247, 158, 2, 0.75);
     padding: 15px 32px;
     display: inline-block;
     font-size: 1.2em;
+}
+input[type=reset]:hover {
+    background-color: #F79E02;
+    font-size: 1.3em;
 }
 input[type=text],
 input[type=password],
@@ -89,6 +97,29 @@ input[type=radio] {
 }
 input[type=text]:invalid{
     /* magari meglio al submit.. */
+}
+#msgBar {
+    position: fixed;
+    max-width: 35%;
+    margin: 5% auto;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+    display: none;
+    padding: 3vh 10vh;
+    border-radius: 0.2em;
+    color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: center;
+}
+#msgBar.msg-error {
+    background: #F79E02;
+    display: block;
+}
+#msgBar.msg-info {
+    background: #10E7D0;
+    display: block;
 }
 /* Todo: Mediaquery the width! */
 .site {

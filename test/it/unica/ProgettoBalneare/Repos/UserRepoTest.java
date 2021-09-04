@@ -5,6 +5,7 @@
  */
 package it.unica.ProgettoBalneare.Repos;
 
+import it.unica.ProgettoBalneare.Models.CommonResponse;
 import it.unica.ProgettoBalneare.Models.UserModel;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -37,8 +38,8 @@ public class UserRepoTest {
                 false);
         
         UserRepo instance = new UserRepo();
-        boolean result = instance.addUser(newUser);
-        Assert.assertTrue(result, "Add user returned false and so it broke somewhere");
+        CommonResponse result = instance.addUser(newUser);
+        Assert.assertTrue(result.result, result.message);
         
     }
     

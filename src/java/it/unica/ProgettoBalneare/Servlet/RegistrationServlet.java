@@ -83,12 +83,22 @@ public class RegistrationServlet extends HttpServlet {
                     );
             // Aggiungo l'utente sul database tramite la Factory
             UserRepo userRepo = UserRepo.getInstance();
-            userRepo.addUser(newUser);
-
-            /* Rispondo che è andato a buon fine */
-            response.setContentType("text/plain");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write("Utente inserito correttamente");
+            CommonResponse res = userRepo.addUser(newUser);
+            
+            // Controllo l'esito
+            if(res.result) {
+                /* Rispondo che è andato a buon fine */
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("Utente inserito correttamente");
+            }
+            else {
+                /* Passo al front end il messaggio di errore */
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("Errore durante l'inserimento dell'utente " + res.message);
+            }
+            
 
         } catch (Exception e) {
             /* Rispondo che è andato storto*/

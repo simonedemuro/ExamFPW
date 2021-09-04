@@ -5,6 +5,7 @@
  */
 package it.unica.ProgettoBalneare.Repos;
 import it.unica.ProgettoBalneare.Db.DatabaseManager;
+import it.unica.ProgettoBalneare.Models.CommonResponse;
 import it.unica.ProgettoBalneare.Models.UserModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +33,7 @@ public class UserRepo {
     }
     
     
-    public boolean addUser(UserModel newUser){
+    public CommonResponse addUser(UserModel newUser){
         // Connection parameters
         Connection conn= null;
         PreparedStatement stmt = null;
@@ -61,10 +62,10 @@ public class UserRepo {
             LOG.info("Inserting a new user:\n" + stmt.toString());
         
             stmt.executeUpdate();
-            return true;
+            return new CommonResponse(true,null,null);
         }catch(SQLException e){
             Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());
-            return false;
+            return new CommonResponse(false,e.getMessage(),e);
         } finally {
             try{ set.close();} catch(Exception e){}
             try{ stmt.close();} catch(Exception e){}

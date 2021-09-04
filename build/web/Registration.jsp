@@ -62,7 +62,7 @@
                     <label for="Fmail">Indirizzo e-mail: </label>
                     <input type="email" id="Fmail" name="Fmail" placeholder="La tua e-mail" autocomplete="off" required>
                     <label for="Fcell">Numero di telefono: </label>
-                    <input type="tel" id="Fcell" name="Fcell" placeholder="Il tuo numero di telefono" autocomplete="off" required>
+                    <input type="tel" id="Fcell" name="Fcell" placeholder="Il tuo numero di telefono" autocomplete="off" pattern="\d*" required>
                     <p>Si desidera ricevere la fattura? </p>
                     <label class="lbl-full-width">
                         <input type="radio" name="Finvoice" id="invoiceYes" value="true"> Si
@@ -82,6 +82,6 @@
     <footer>Footer</footer>
 
 </div>
-
+<div id="msgBar"> {{MESSAGGIO}}</div>
 </body>
 </html>
