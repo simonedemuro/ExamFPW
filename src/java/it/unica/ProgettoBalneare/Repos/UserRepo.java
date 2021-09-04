@@ -32,6 +32,52 @@ public class UserRepo {
         return instance;
     }
     
+    public CommonResponse getUserByUsername(String username){
+        // Connection parameters
+        Connection conn= null;
+        PreparedStatement stmt = null;
+        ResultSet set = null; 
+        
+        try{
+            // Opening Connection
+            conn = DatabaseManager.getInstance().getDbConnection();
+            // Prepearing the query
+            String query = 
+                    "SELECT username, password, name, surname, birthday, fiscalnumber, sex, email, phone, invoiceoptin, \"Id\", \"isAdmin\" FROM public.\"user\" WHERE username = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, username);
+            
+            LOG.info("Getting the user:\n" + username + stmt.toString());
+        
+            set = stmt.executeQuery();
+            if(set.next()){
+                UserModel utente = new UserModel();
+                utente.setUsername(set.getString("username"));
+                utente.setPassword(set.getString("password"));
+                utente.setName(set.getString("name"));
+                utente.setSurname(set.getString("surname"));
+                utente.setBirthday(set.getString("birthday"));
+                utente.setFiscalNumber(set.getString("fiscalnumber"));
+                utente.setSex(set.getString("sex").charAt(0));
+                utente.setEmail(set.getString("email"));
+                utente.setPhone(set.getString("phone"));
+                utente.setInvoiceOptIn(set.getBoolean("invoiceoptin"));
+                utente.setId(set.getInt("Id"));
+                utente.setIsAdmin(set.getBoolean("IsAdmin"));
+                
+                return new CommonResponse(true,"Ok", utente);
+            }else{
+                return new CommonResponse(false,"user non trovato", null);
+            }
+        }catch(SQLException e){
+            Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());
+            return new CommonResponse(false,e.getMessage(),e);
+        } finally {
+            try{ set.close();} catch(Exception e){}
+            try{ stmt.close();} catch(Exception e){}
+            try{ conn.close();} catch(Exception e){}
+        }
+    }
     
     public CommonResponse addUser(UserModel newUser){
         // Connection parameters

@@ -26,6 +26,7 @@ Author     : fpw
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Adding the front end logics -->
     <script src="Js/Registration.js"></script>
+    <script src="Js/Login.js"></script>
 </head>
 <body>
 <div class="site">
@@ -35,7 +36,7 @@ Author     : fpw
     <nav>Nav</nav>
     <main>
         <section class="card-login">
-            <form id="from-login" action="login" method="post">
+            <form id="from-login" action="" method="post">
                 <div class="form-login-surround">
                     <div class="_2_3-form">
                         <label for="Fuser">Username: </label>
@@ -61,7 +62,10 @@ Author     : fpw
             <p id="msg-signup"> se non hai ancora un account <a href="/Registration.jsp">Registrati</a> </p>
         </section>
     </main>
-    <footer>Footer</footer>
+    <footer>
+    <c:if test="${not empty user}">
+    <h1>Ciao ${user}!</h1>
+    </c:if></footer>
 </div>
 <div id="msgBar"> {{MESSAGGIO}}</div>
 </body>

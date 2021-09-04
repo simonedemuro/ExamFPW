@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class UserModel {
     final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
+    private boolean isAdmin;
     private long Id;
     private String Username;
     private String Password;
@@ -43,6 +44,14 @@ public class UserModel {
     public UserModel() {
     }
 
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
     public long getId() {
         return Id;
     }

@@ -5,6 +5,9 @@
  */
 package it.unica.ProgettoBalneare.Servlet;
 
+import it.unica.ProgettoBalneare.Models.CommonResponse;
+import it.unica.ProgettoBalneare.Models.UserModel;
+import it.unica.ProgettoBalneare.Repos.UserRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -39,25 +42,31 @@ public class LoginServlet extends HttpServlet {
         String pass = request.getParameter("Fpass");
         
         try{
-            // Utils.checkString(user, 4, 20); //valida i parametri ricevuti
+            /* prendo utente dal DB */
+            CommonResponse userDBResult = UserRepo.getInstance().getUserByUsername(user);
+            // controllo sia stato trovato altrimenti lo gestisco come errore
+            if (!userDBResult.result){
+                throw new Exception("Errore durante il recupero dell'utente: " + userDBResult.message);
+            } 
+            // cast da risposta a oggetto Utente
+            UserModel dbUser = (UserModel)userDBResult.payload;
             
-            // Utente utente = UtenteFactory.getInstance().getUtenteByUsernamePassword(user, pass);
-            
-            //if(login(user, pass)){ 
-            if("" != null){ // verifica se le credenziali sono corrette
-                session.setAttribute("user", "gianni"/*utente.getUsername()*/); //imposta utente
-                session.setAttribute("lastLogin", "01/01/2001"/*Utils.convertTime(session.getLastAccessedTime())*/); // imposta last login
-                session.setMaxInactiveInterval(30); // tempo massimo di inattività (in secondi) prima che la sessione scada
-                response.sendRedirect("user"); // redirect alla servlet user
+            /* Controllo la password corrisponda */
+            if(dbUser != null && dbUser.getPassword().equals(pass)){ 
+                session.setAttribute("user", dbUser.getUsername());
+                session.setMaxInactiveInterval(30); // timeout scadenza sessione
+                response.getWriter().write("Login effettuato correttamente");
+                //response.sendRedirect("index.jsp");
             }
             else
-                throw new Exception("User o pass non validi!");
+                throw new Exception("Errore: password errata");
             
         }catch(Exception e){
-            session.invalidate(); // invlaida sessione
-            request.setAttribute("errorMessage", e.getMessage()); //imposto parametri richiesta 
+            session.invalidate();
+            request.setAttribute("errorMessage", e.getMessage()); 
             request.setAttribute("link", "login.jsp");
-            request.getRequestDispatcher("error.jsp").forward(request, response); //inoltra alla pagina di errore
+            response.getWriter().write(e.getMessage());
+            //request.getRequestDispatcher("error.jsp").forward(request, response); 
         }
     }
 
