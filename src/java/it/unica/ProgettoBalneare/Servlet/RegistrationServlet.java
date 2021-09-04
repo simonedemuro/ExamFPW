@@ -5,8 +5,12 @@
  */
 package it.unica.ProgettoBalneare.Servlet;
 
+import it.unica.ProgettoBalneare.Models.CommonResponse;
+import it.unica.ProgettoBalneare.Models.UserModel;
+import it.unica.ProgettoBalneare.Repos.UserRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.util.Collections.list;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,19 +35,7 @@ public class RegistrationServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegistrationServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegistrationServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,7 +65,38 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        try {
+            /* Processo la chiamata */
+            // creo entità per il database
+            UserModel newUser
+                    = new UserModel(request.getParameter("Fuser"),
+                            request.getParameter("Fpass1"),
+                            request.getParameter("Fname"),
+                            request.getParameter("Fsurn"),
+                            request.getParameter("Fbirt"),
+                            request.getParameter("Fcode"),
+                            request.getParameter("Fsex").charAt(0), // to char
+                            request.getParameter("Fmail"),
+                            request.getParameter("Fcell"),
+                            Boolean.parseBoolean(request.getParameter("Finvoice")) // su db è boolean
+                    );
+            // Aggiungo l'utente sul database tramite la Factory
+            UserRepo userRepo = UserRepo.getInstance();
+            userRepo.addUser(newUser);
+
+            /* Rispondo che è andato a buon fine */
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("Utente inserito correttamente");
+
+        } catch (Exception e) {
+            /* Rispondo che è andato storto*/
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("Errore durante l'inserimento dell'utente " + e.getMessage());
+        }
+
     }
 
     /**

@@ -53,11 +53,11 @@
                     <input type="text" minlength="16" maxlength="16" id="Fcode" name="Fcode" placeholder="Il tuo codice fiscale a 16 cifre" autocomplete="off" required>
                     <p>Sesso: </p>
                     <label class="lbl-full-width">
-                        <input type="radio" name="isMale" id="isMale" value="isMale" checked> Male
+                        <input type="radio" name="Fsex" id="isMale" value="M" checked> Male
                     </label>
                         <br>
                     <label class="lbl-full-width">
-                        <input type="radio" name="isFem" id="isFem" value="isFem"> Female
+                        <input type="radio" name="Fsex" id="isFem" value="F"> Female
                     </label>
                     <label for="Fmail">Indirizzo e-mail: </label>
                     <input type="email" id="Fmail" name="Fmail" placeholder="La tua e-mail" autocomplete="off" required>
@@ -65,11 +65,11 @@
                     <input type="tel" id="Fcell" name="Fcell" placeholder="Il tuo numero di telefono" autocomplete="off" required>
                     <p>Si desidera ricevere la fattura? </p>
                     <label class="lbl-full-width">
-                        <input type="radio" name="invoiceYes" id="invoiceYes" value="invoiceYes"> Si
+                        <input type="radio" name="Finvoice" id="invoiceYes" value="true"> Si
                     </label>
                     <br>
                     <label class="lbl-full-width">
-                        <input type="radio" name="invoiceNo" id="invoiceNo" value="invoiceNo" checked> No
+                        <input type="radio" name="Finvoice" id="invoiceNo" value="false" checked> No
                     </label>
                     <div class="registration-form-submit">
                         <input type="reset" value="Pulisci">
