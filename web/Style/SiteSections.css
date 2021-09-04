@@ -35,3 +35,18 @@ and open the template in the editor.
     margin-left: 2px;
     margin-bottom: 0px;
 }
+.card-login {
+}
+.card-login .form-login-surround {
+    display: flex;
+}
+.card-login .form-login-surround ._2_3-form {
+    flex: 1;
+    margin: 0 10px 0 10px;
+}
+.card-login .form-login-surround ._1_3-form {
+    margin: 0 10px 0 5px;
+}
+._1_3-form input[type=submit] {
+    margin-top: 10%;
+}
