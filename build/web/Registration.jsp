@@ -22,21 +22,34 @@
     <script src="Js/Registration.js"></script>
     <script src="Js/Login.js"></script>
 </head>
-    <body>
 
-<div class="site">
+<body>
+    <div class="site">
+        <header>
+            <div class="title-container">
+                <h1> Prenotazioni Villasimius 🏖️ </h1>
+                <p class="sub"> Controlla, Prenota, Balnea 🏊‍️</p>
+            </div>
+        </header>
+        <nav>
+        <jsp:include page="NavSection.jsp"/>
+        </nav>
+        <c:if test="${empty user}">
+            <!-- Card Login -->
+            <jsp:include page="LoginSection.jsp"/>
 
-    <header>
-        <h1> &lt;header&gt;  </h1>
-    </header>
-    <nav>Nav</nav>
-    <main>
-        <!-- Registration Form Section -->
-        <jsp:include page="RegistrationSection.jsp"/>
-    </main>
-    <footer>Footer</footer>
-
-</div>
-<div id="msgBar"> {{MESSAGGIO}}</div>
+            <main>
+            <!-- Registration Form Section -->
+            <jsp:include page="RegistrationSection.jsp"/>
+            </main>
+        </c:if>
+        <main>
+        <c:if test="${not empty user}">
+            ${user} risulti correntemente loggato, per registrare un nuovo account effettua il log out.
+        </c:if>
+        </main>
+        <footer>Footer</footer>
+    </div>
+    <div id="msgBar"> {{MESSAGGIO}}</div>
 </body>
 </html>

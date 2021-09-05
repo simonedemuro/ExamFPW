@@ -10,11 +10,9 @@ Author     : fpw
 <!DOCTYPE html>
 <html>
 <head>
-    <c:if test="${empty attr1}">
-        <c:redirect url="HomeServlet"/>
-        <!-- reindirizza a HomeServlet -->
-    </c:if>
     <meta charset="UTF-8">
+    <meta name="description" content="Piattaforma prenotazioni posti in spiaggia a villasimius" />
+    <meta name="keywords" content="prenotazione, posti, piaggia, villasimius, covid" />
     <title>Progetto Balneare</title>
     <!-- Styling the site-->
     <link href="Style/SiteGeneral.css" rel="stylesheet">
@@ -31,41 +29,34 @@ Author     : fpw
 <body>
 <div class="site">
     <header>
-        <h1> &lt;header&gt; </h1>
+        <div class="title-container">
+        <h1> Prenotazioni Villasimius 🏖️ </h1>
+        <p class="sub"> Controlla, Prenota, Balnea 🏊‍️</p>
+        </div>
     </header>
-    <nav>Nav</nav>
-    <main>
-        <section class="card-login">
-            <form id="from-login" action="" method="post">
-                <div class="form-login-surround">
-                    <div class="_2_3-form">
-                        <label for="Fuser">Username: </label>
-                        <input autocomplete="off" id="Fuser" name="Fuser" onfocus="this.removeAttribute('readonly');"
-                               placeholder="Il tuo username"
-                               readonly
-                               required type="text">
-                        <!-- readonly e remove serve a impedire a mozzilla dicashare le informazioni con prepotenza -->
-                    </div>
-                    <div class="_2_3-form">
-                    <label for="Fpass">Password: </label>
-                    <input autocomplete="off" id="Fpass" name="Fpass" onfocus="this.removeAttribute('readonly');"
-                           placeholder="La tua password"
-                           readonly
-                           required type="password">
-                    </div>
-                    <div class="_1_3-form">
-                    <label for="subm"> </label>
-                    <input type="submit" id="subm" value="Login">
-                    </div>
-                </div>
-            </form>
-            <p id="msg-signup"> se non hai ancora un account <a href="/Registration.jsp">Registrati</a> </p>
+    <!-- Card Logged User -->
+    <c:if test="${not empty user}">
+        <section class="card-logged-user">
+            <div class="logged-user-item">
+                <h2>Ciao ${user}!</h2>
+            </div>
+            <div class="logged-user-item">
+                <button id="btn-logout" class="a-to-btn" href=""> Log out </button>
+            </div>
         </section>
+    </c:if>
+    <nav>
+        <jsp:include page="NavSection.jsp"/>
+    </nav>
+    <c:if test="${empty user}">
+        <!-- Card Login -->
+        <jsp:include page="LoginSection.jsp"/>
+    </c:if>
+    <main>
     </main>
     <footer>
-    <c:if test="${not empty user}">
-    <h1>Ciao ${user}!</h1>
-    </c:if></footer>
+
+    </footer>
 </div>
 <div id="msgBar"> {{MESSAGGIO}}</div>
 </body>

@@ -37,10 +37,13 @@ and open the template in the editor.
 .card-login .form-login-surround {
     display: flex;
     align-items: center;
+    /* A capo responsive automaco sui campi di login*/
+    flex-wrap: wrap;
 }
 .card-login .form-login-surround ._2_3-form {
     flex: 1;
     margin: 0 10px 0 10px;
+    min-width: 250px;
 }
 .card-login .form-login-surround ._1_3-form {
     margin: 0 10px 0 5px;
@@ -60,4 +63,19 @@ and open the template in the editor.
 }
 .card-login #from-login {
     margin-bottom: 5px;
+}
+.card-logged-user {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 10px 0 0;
+    align-items: center;
+}
+.card-logged-user .logged-user-item {
+    flex-basis: auto;
+}
+.card-logged-user .logged-user-item > h2 {
+    margin: 0 20px 0 0;
+}
+.a-to-btn {
+    margin: 10px;
 }

@@ -23,7 +23,7 @@ body {
     font-size: 1.2em;
 }
 /* Todo: su dispositivi piccoli metti width 100% */
-input[type=submit] {
+input[type=submit], .btn-nav, .a-to-btn {
     border: none;
     color: white;
     background-color: rgba(16, 231, 208, 0.75); /* alpha cosi quando passi sopra diventa acceso */
@@ -31,7 +31,7 @@ input[type=submit] {
     display: inline-block;
     font-size: 1.2em;
 }
-input[type=submit]:hover {
+input[type=submit]:hover, .btn-nav:hover, .a-to-btn:hover {
     background-color: #10E7D0;
     font-size: 1.3em;
 }
@@ -121,7 +121,6 @@ input[type=text]:invalid{
     background: #10E7D0;
     display: block;
 }
-/* Todo: Mediaquery the width! */
 .site {
     margin: auto; /* Center the main div */
     border: 3px solid rgba(255,255,255,0.1); /* change .01 alpha to something else then*/
@@ -135,7 +134,15 @@ input[type=text]:invalid{
     width: 70%;
 }
 nav {
-
+    display: flex;
+    flex-wrap: wrap;
+}
+nav .btn-nav, .a-to-btn{
+    flex: 1;
+    margin: 2px 5px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
 }
 main {
 }
@@ -144,7 +151,8 @@ main > section, main > article {
     /*min-height: 60vh;*/
 }
 header, footer {
-    height: 15vh;
+    min-height: 15vh;
+    overflow: hidden;
 }
 header, footer, section, article, nav {
     border: 3px solid rgba(255,255,255,0.1); /* change .01 alpha to something else then*/
@@ -152,4 +160,39 @@ header, footer, section, article, nav {
     background: #00b8ff; /*#6CDAEE;*/
     padding: 1em;
     margin-bottom: 1em;
+}
+header {
+    text-align: center;
+}
+header > h1 {
+    margin: 0;
+}
+header p.sub {
+    font-style: italic;
+    margin-bottom: 0;
+    text-align: right;
+}
+header .title-container {
+    display: inline-block;
+}
+/* Schermi larghi */
+@media screen and (max-width: 1200px){
+    .site {
+        width: 85%;
+    }
+}
+/* Tablet e laptop piccoli */
+@media screen and (max-width: 800px){
+    .site {
+        width: 95%;
+    }
+}
+/* Telefoni datati o finestra rimpicciolita */
+@media screen and (max-width: 800px){
+    .site {
+        width: 100%;
+    }
+    nav .btn-nav {
+        flex-basis: 100%;
+    }
 }
