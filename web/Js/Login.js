@@ -55,7 +55,7 @@ $(function() {
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 // Messaggio di errore
-                $("#msgBar").text(data);
+                $("#msgBar").text(textStatus + " " + errorThrown);
                 // Metto il messaggio e la classe info per farlo apparire
                 $("#msgBar").addClass("msg-error");
 

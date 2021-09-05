@@ -5,6 +5,10 @@
  */
 package it.unica.ProgettoBalneare.Servlet;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil;
+import it.unica.ProgettoBalneare.Models.CommonResponse;
+import it.unica.ProgettoBalneare.Models.UserModel;
+import it.unica.ProgettoBalneare.Repos.UserRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author fpw
  */
-@WebServlet(name = "LogoutServler", urlPatterns = {"/logout"})
-public class LogoutServler extends HttpServlet {
+@WebServlet(name = "PersonalArea", urlPatterns = {"/personalData"})
+public class PersonalArea extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,17 +38,42 @@ public class LogoutServler extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        /* Prendo la sessione */
+        /* prendo dati dall'utente e valido */
         HttpSession session = request.getSession(false);
-        
-        /*  */
-        if(session != null && session.getAttribute("user") != null){
-            session.invalidate();
-            response.getWriter().write("Logout effettuato correttamente");
-        }else{
-            response.getWriter().write("Errore: errore durante il logout, probabilmente la sessione era scaduta");
+        String username = (String)session.getAttribute("user");
+        if (username == null){
+            // gestisci errore
+            return;
         }
-
+                
+        /* recupero i dati dal db */
+        UserRepo userRepo = UserRepo.getInstance();
+        CommonResponse res = userRepo.getUserByUsername(username);
+        if(!res.result){
+            // gestisci errore
+            return;
+        }
+        UserModel dbUser = (UserModel)res.payload;
+        
+        /* Metto nella reuqest */
+        request.setAttribute("dbUser", dbUser);
+         /* Mando indietro */
+         request.getRequestDispatcher("PersonalArea.jsp").forward(request, response);
+         
+//        request.setAttribute("isAdmin", dbUser.isIsAdmin());
+//        request.setAttribute("Id", dbUser.getId());
+//        request.setAttribute("Username", dbUser.getUsername());
+//        request.setAttribute("Password", dbUser.getPassword());
+//        request.setAttribute("Name", dbUser.getName());
+//        request.setAttribute("Surname", dbUser.getSurname());
+//        request.setAttribute("Birthday", dbUser.getBirthday());
+//        request.setAttribute("FiscalNumber", dbUser.getFiscalNumber());
+//        request.setAttribute("sex", dbUser.getSex());
+//        request.setAttribute("email", dbUser.getEmail());
+//        request.setAttribute("phone", dbUser.getPhone());
+//        request.setAttribute("invoiceOptIn", dbUser.isInvoiceOptIn());
+       
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

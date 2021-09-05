@@ -12,7 +12,6 @@ and open the template in the editor.
     display: flex;
     justify-content: center;
 }
-/*Todo: media query qua*/
 .card-registration > div {
     flex-basis: 50%;
     overflow: hidden;
@@ -78,4 +77,42 @@ and open the template in the editor.
 }
 .a-to-btn {
     margin: 10px;
+}
+section.pers-sec {
+    display: flex;
+    flex-direction: column;
+}
+section.pers-sec .pers-sec-lvl1-col {
+    display: flex;
+    justify-content: center;
+}
+.pers-sec-lvl1-col .personal-info-form {
+    flex-basis: 50%;
+}
+/* Schermi larghi */
+@media screen and (max-width: 1200px){
+    .card-registration > div {
+        flex-basis: 60%;
+    }
+    .pers-sec-lvl1-col .personal-info-form {
+        flex-basis: 60%;
+    }
+}
+/* Tablet e laptop piccoli */
+@media screen and (max-width: 800px){
+    .pers-sec-lvl1-col .personal-info-form {
+        flex-basis: 80%;
+    }
+    .card-registration > div {
+        flex-basis: 80%;
+    }
+}
+/* Telefoni datati o finestra rimpicciolita */
+@media screen and (max-width: 800px){
+    .card-registration > div {
+        flex-basis: 100%;
+    }
+    .pers-sec-lvl1-col .personal-info-form {
+        flex-basis: 100%;
+    }
 }
