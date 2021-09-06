@@ -19,6 +19,7 @@
     <!-- Adding the front end logics -->
     <script src="Js/Registration.js"></script>
     <script src="Js/Login.js"></script>
+    <script src="Js/SitePopups.js"></script>
     <script src="Js/PersonalArea.js"></script>
 </head>
 <body>
@@ -46,16 +47,25 @@
     <c:if test="${empty user}">
         <!-- Errore in caso di mancato login -->
     </c:if>
-    <input type="hidden" value="${user}"/>
+
+    <c:if test="${empty dbUser}">
+        <c:redirect url ="personalData" />   <!-- reindirizza a HomeServlet -->
+    </c:if>
+    <!-- Questi campi mi servono per settare i radio con Jquery -->
+    <input id="sex" type="hidden" value="${dbUser.getSex()}"/>
+    <input id="invoice" type="hidden" value="${dbUser.isInvoiceOptIn()}"/>
     <section class="pers-sec">
         <div>
             <p> Ciao ${user}, qua puoi modificare le tue informazioni personali: </p>
+            <p> Cliccando sui campi che vuoi modificare compariranno i valori precedentemente impostati per aiutarti (tranne per la password 😜)</p>
         </div>
         <div class="pers-sec-lvl1-col">
             <div class="personal-info-form">
                 <form id="registration-data" action="">
                 <label for="Fuser">Username: </label>
-                <input type="text" id="Fuser" name="Fuser" placeholder="Il tuo username" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required> <!-- readonly e remove serve a impedire a mozzilla di cashare le informazioni con prepotenza -->
+                <input class="magic-complete" type="text" id="Fuser" name="Fuser" placeholder="${dbUser.getUsername()}" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required> <!-- readonly e remove serve a impedire a mozzilla di cashare le informazioni con prepotenza -->
+
+                <h2> Cambia Password: </h2>
                 <label for="Fpass1">Crea password: </label>
                 <input type="password" id="Fpass1" name="Fpass1" placeholder="La tua nuova password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required>
                 <label for="Fpass2">Ripeti password: </label>
@@ -64,36 +74,35 @@
                 <h2> Dati Anagrafici</h2>
 
                 <label for="Fname">Nome: </label>
-                <input type="text" id="Fname" name="Fname" placeholder="Il tuo nome" autocomplete="off" required>
+                <input class="magic-complete" type="text" id="Fname" name="Fname" placeholder="${dbUser.getName()}" autocomplete="off" required>
                 <label for="Fsurn">Cognome: </label>
-                <input type="text" id="Fsurn" name="Fsurn" placeholder="Il tuo cognome" autocomplete="off" required>
+                <input class="magic-complete" type="text" id="Fsurn" name="Fsurn" placeholder="${dbUser.getSurname()}" autocomplete="off" required>
                 <label for="Fbirt">Data di nascita: </label>
-                <input type="date" id="Fbirt" name="Fbirt" placeholder="Seleziona data di nascita" autocomplete="off" required>
+                <input class="magic-complete" type="date" id="Fbirt" name="Fbirt" placeholder="${dbUser.getBirthday()}" autocomplete="off" required>
                 <label for="Fcode">Codice fiscale: </label>
-                <input type="text" minlength="16" maxlength="16" id="Fcode" name="Fcode" placeholder="Il tuo codice fiscale a 16 cifre" autocomplete="off" required>
+                <input class="magic-complete" type="text" minlength="16" maxlength="16" id="Fcode" name="Fcode" placeholder="${dbUser.getFiscalNumber()}" autocomplete="off" required>
                 <p>Sesso: </p>
                 <label class="lbl-full-width">
-                <input type="radio" name="Fsex" id="isMale" value="M" checked> Male
+                <input type="radio" name="Fsex" id="isMale" value="M" > Male
                 </label>
                 <br>
                 <label class="lbl-full-width">
                 <input type="radio" name="Fsex" id="isFem" value="F"> Female
                 </label>
                 <label for="Fmail">Indirizzo e-mail: </label>
-                <input type="email" id="Fmail" name="Fmail" placeholder="La tua e-mail" autocomplete="off" required>
+                <input class="magic-complete" type="email" id="Fmail" name="Fmail" placeholder="${dbUser.getEmail()}" autocomplete="off" required>
                 <label for="Fcell">Numero di telefono: </label>
-                <input type="tel" id="Fcell" name="Fcell" placeholder="Il tuo numero di telefono" autocomplete="off" pattern="\d*" required>
+                <input class="magic-complete" type="tel" id="Fcell" name="Fcell" placeholder="${dbUser.getPhone()}" autocomplete="off" pattern="\d*" required>
                 <p>Si desidera ricevere la fattura? </p>
                 <label class="lbl-full-width">
                 <input type="radio" name="Finvoice" id="invoiceYes" value="true"> Si
                 </label>
                 <br>
                 <label class="lbl-full-width">
-                <input type="radio" name="Finvoice" id="invoiceNo" value="false" checked> No
+                <input type="radio" name="Finvoice" id="invoiceNo" value="false" > No
                 </label>
                 <div class="registration-form-submit">
-                <input type="reset" value="Pulisci">
-                <input type="submit" value="Registrati">
+                <input id="doUpdate" type="submit" value="Update">
                 </div>
                 </form>
             </div>

@@ -11,6 +11,12 @@ import it.unica.ProgettoBalneare.Models.UserModel;
 import it.unica.ProgettoBalneare.Repos.UserRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,44 +42,82 @@ public class PersonalArea extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        /* prendo dati dall'utente e valido */
-        HttpSession session = request.getSession(false);
-        String username = (String)session.getAttribute("user");
-        if (username == null){
-            // gestisci errore
-            return;
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+
+            /* prendo dati dall'utente e valido */
+            HttpSession session = request.getSession(false);
+            String username = session != null ? (String) session.getAttribute("user") : null;
+            if (username == null) {
+                throw new Exception("Errore: si sta provando ad entrare nella sezione personale senza essere loggati, probabilmente la sessione è scaduta");
+            }
+
+            /* recupero i dati dal db */
+            UserRepo userRepo = UserRepo.getInstance();
+            CommonResponse res = userRepo.getUserByUsername(username);
+            if (!res.result) {
+                throw new Exception("Errore: non è stato possibile recuperare l'utente " + username + " ci scusiamo");
+            }
+            UserModel dbUser = (UserModel) res.payload;
+
+            /* Se viene settata l'azione di fare update processo la richiesta */
+            Object action = request.getParameter("action");
+            if (action != null && ((String) action).equals("update")) {
+                // LinkedHashMap mi serve per avere la garanzia di mantenimento dell'ordine
+                Map<String, Object> clientData = new LinkedHashMap<String, Object>();
+
+                /* rinomino manualmente i campi anzi che passare quelli ricevuti 
+            dalla pagina in modo da non permettere Sql Injection 💉💉💉💉💉💉💉💉💉💉💉💉💉💉💉*/
+                if (request.getParameter("Fpass1") != null) {
+                    clientData.put("password", request.getParameter("Fpass1"));
+                }
+                if (request.getParameter("Fname") != null) {
+                    clientData.put("name", request.getParameter("Fname"));
+                }
+                if (request.getParameter("Fsurn") != null) {
+                    clientData.put("surname", request.getParameter("Fsurn"));
+                }
+                if (request.getParameter("Fbirt") != null) {
+                    clientData.put("birthday", request.getParameter("Fbirt"));
+                }
+                if (request.getParameter("Fcode") != null) {
+                    clientData.put("fiscalnumber", request.getParameter("Fcode"));
+                }
+                if (request.getParameter("Fsex") != null) {
+                    clientData.put("sex", request.getParameter("Fsex"));
+                }
+                if (request.getParameter("Fmail") != null) {
+                    clientData.put("email", request.getParameter("Fmail"));
+                }
+                if (request.getParameter("Fcell") != null) {
+                    clientData.put("phone", request.getParameter("Fcell"));
+                }
+                if (request.getParameter("Fbirt") != null) {
+                    clientData.put("birthday", request.getParameter("Fbirt"));
+                }
+                if (request.getParameter("Finvoice") != null) {
+                    clientData.put("invoiceoptin", request.getParameter("Finvoice"));
+                }
+
+                /* update sul db */
+                CommonResponse updateRes = userRepo.updateUser(dbUser.getId(), clientData);
+                /* aggiornamento utente appena aggionrato per garantire allineamento */
+                CommonResponse justUpdatedUser = userRepo.getUserByUsername(username);
+                if (!updateRes.result || !justUpdatedUser.result) {
+                    throw new Error("Errore: impossibile salavre le modifiche richieste, ci spiace.");
+                }
+                dbUser = (UserModel)justUpdatedUser.payload;
+            }
+
+            /* arrivato qua ritorno lo user perche so di non essere in update */
+            /* Metto nella reuqest */
+            request.setAttribute("dbUser", dbUser);
+            /* Mando indietro */
+            request.getRequestDispatcher("PersonalArea.jsp").forward(request, response);
+        } catch (Exception e) {
+            // forward to error page
         }
-                
-        /* recupero i dati dal db */
-        UserRepo userRepo = UserRepo.getInstance();
-        CommonResponse res = userRepo.getUserByUsername(username);
-        if(!res.result){
-            // gestisci errore
-            return;
-        }
-        UserModel dbUser = (UserModel)res.payload;
-        
-        /* Metto nella reuqest */
-        request.setAttribute("dbUser", dbUser);
-         /* Mando indietro */
-         request.getRequestDispatcher("PersonalArea.jsp").forward(request, response);
-         
-//        request.setAttribute("isAdmin", dbUser.isIsAdmin());
-//        request.setAttribute("Id", dbUser.getId());
-//        request.setAttribute("Username", dbUser.getUsername());
-//        request.setAttribute("Password", dbUser.getPassword());
-//        request.setAttribute("Name", dbUser.getName());
-//        request.setAttribute("Surname", dbUser.getSurname());
-//        request.setAttribute("Birthday", dbUser.getBirthday());
-//        request.setAttribute("FiscalNumber", dbUser.getFiscalNumber());
-//        request.setAttribute("sex", dbUser.getSex());
-//        request.setAttribute("email", dbUser.getEmail());
-//        request.setAttribute("phone", dbUser.getPhone());
-//        request.setAttribute("invoiceOptIn", dbUser.isInvoiceOptIn());
-       
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

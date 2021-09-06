@@ -6,7 +6,7 @@
     <a href="Registration.jsp" class="btn-nav"> Registrati</a>
 </c:if>
 <c:if test="${not empty user}">
-    <a class="btn-nav"> Area personale</a>
+    <a href="PersonalArea.jsp" class="btn-nav"> Area personale</a>
 </c:if>
 <c:if test="${not empty user && userRole == 'admin'}">
     <a class="btn-nav"> Gestione prenotazioni</a>

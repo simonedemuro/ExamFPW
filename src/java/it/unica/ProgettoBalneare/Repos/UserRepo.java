@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Map;
 
 /**
  *
@@ -109,6 +110,58 @@ public class UserRepo {
         
             stmt.executeUpdate();
             return new CommonResponse(true,null,null);
+        }catch(SQLException e){
+            Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());
+            return new CommonResponse(false,e.getMessage(),e);
+        } finally {
+            try{ set.close();} catch(Exception e){}
+            try{ stmt.close();} catch(Exception e){}
+            try{ conn.close();} catch(Exception e){}
+        }
+    }
+    
+    public CommonResponse updateUser(long Id, Map<String, Object> clientData) {
+        /* Controllo i parametri passati e creo la query */
+        // Creo solo la stringa query
+        String query = "UPDATE \"user\" SET";
+        for (String fieldName : clientData.keySet()) {
+            query += String.format(" %s = ? ,",fieldName);
+            // clientData.get(fieldName));
+        }
+        query = query.substring(0, query.length() - 1); // tolgo l'ultima virgola di troppo
+        query += " WHERE \"Id\" = ?;";
+        
+
+        // Preparo la connessione
+        Connection conn= null;
+        PreparedStatement stmt = null;
+        ResultSet set = null;
+
+        try{
+            // Opening Connection
+            conn = DatabaseManager.getInstance().getDbConnection();
+            // Prepearing the query
+            stmt = conn.prepareStatement(query);
+
+            /* aggiungo alla query i parametri che voglio updatare
+            uso un contatore per avere anche il numero del parametro */
+            int parameterNumber = 1;
+            for (String fieldName : clientData.keySet()) {
+                /* facciamo un eccezione per i campi che non sono stringa */
+                if (fieldName == "invoiceoptin")
+                    stmt.setBoolean(parameterNumber, Boolean.parseBoolean((String)clientData.get(fieldName)));
+                else
+                    stmt.setString(parameterNumber, (String)clientData.get(fieldName));
+                parameterNumber++;
+            }
+            /* Importante aggiungo l'id alla fine che sono sicuro sia sano
+            *  perché proviene dalla query fatta con getUser in PersonlArea.java*/
+            stmt.setLong(parameterNumber, Id);
+            
+            // Lancio la query sul database e rispondo true
+            stmt.executeUpdate();
+            return new CommonResponse(true,null,null);
+            
         }catch(SQLException e){
             Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());
             return new CommonResponse(false,e.getMessage(),e);

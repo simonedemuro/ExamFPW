@@ -25,6 +25,7 @@ Author     : fpw
     <!-- Adding the front end logics -->
     <script src="Js/Registration.js"></script>
     <script src="Js/Login.js"></script>
+    <script src="Js/SitePopups.js"></script>
 </head>
 <body>
 <div class="site">
