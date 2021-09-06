@@ -25,6 +25,17 @@ $(function() {
         let data = $("#registration-data :input").serializeArray();
         console.log({'dati form update':data});
 
+        // Controllo che la password scelta corrisponda
+        let newPassIdx = data.findIndex(x => x.name === "Fpass1");
+        let repPassIdx = data.findIndex(x => x.name === "Fpass2");
+
+        if (data[newPassIdx].value !== data[repPassIdx].value){
+            // Evidenzio e lancio un popup di errore
+            $("#Fpass2").css("border", "dashed #F79E02");
+            showMessage("❌ Errore: le password non corrispondono", 3000, true);
+            return;
+        }
+
         // aggiungo campo per triggerare la servlet in update
         data.push({name:"action", value:"update"})
         // rimuovo i campi nulli

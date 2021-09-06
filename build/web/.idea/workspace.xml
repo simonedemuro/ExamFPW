@@ -2,57 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab1beb95-be8b-4d6e-8aaf-152e0c288807" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Js/SitePopups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/classes/.netbeans_automatic_build" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/classes/.netbeans_update_resources" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/classes/it/unica/ProgettoBalneare/Repos/UserRepoTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/ProgettoBalneare/TestNG tests.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/ProgettoBalneare/TestNG tests.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/ProgettoBalneare/testng-failed.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/TEST-it.unica.ProgettoBalneare.Repos.UserRepoTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/bullet_point.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/collapseall.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/emailable-report.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/failed.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/jquery-1.7.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/junitreports/TEST-it.unica.ProgettoBalneare.Repos.UserRepoTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/navigator-bullet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/TestNG tests.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/classes.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/groups.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/methods-alphabetical.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/methods-not-run.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/methods.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/reporter-output.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/testng.xml.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/ProgettoBalneare/toc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/old/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/passed.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/skipped.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/testng-failed.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/testng-reports.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/testng-reports.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/testng-results.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/test/results/testng.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/web/.idea/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/ErrorHandle.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../build/web/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/web/Js/PersonalArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/../build/web/Js/PersonalArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/web/NavSection.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../build/web/NavSection.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/web/PersonalArea.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../build/web/PersonalArea.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/web/Registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../build/web/Registration.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/web/WEB-INF/classes/it/unica/ProgettoBalneare/Repos/UserRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/web/WEB-INF/classes/it/unica/ProgettoBalneare/Repos/UserRepo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build/web/WEB-INF/classes/it/unica/ProgettoBalneare/Servlet/PersonalArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/../build/web/WEB-INF/classes/it/unica/ProgettoBalneare/Servlet/PersonalArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../build/web/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/java/it/unica/ProgettoBalneare/Repos/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/java/it/unica/ProgettoBalneare/Repos/UserRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/java/it/unica/ProgettoBalneare/Servlet/PersonalArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/java/it/unica/ProgettoBalneare/Servlet/PersonalArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Js/PersonalArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/Js/PersonalArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NavSection.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/NavSection.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PersonalArea.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/PersonalArea.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Registration.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +62,7 @@
       <workItem from="1630760020857" duration="8095000" />
       <workItem from="1630783061234" duration="9270000" />
       <workItem from="1630836791075" duration="23562000" />
-      <workItem from="1630938478570" duration="10975000" />
+      <workItem from="1630938478570" duration="12890000" />
     </task>
     <servers />
   </component>

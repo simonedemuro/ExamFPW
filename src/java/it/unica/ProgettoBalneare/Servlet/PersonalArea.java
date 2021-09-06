@@ -68,6 +68,9 @@ public class PersonalArea extends HttpServlet {
 
                 /* rinomino manualmente i campi anzi che passare quelli ricevuti 
             dalla pagina in modo da non permettere Sql Injection 💉💉💉💉💉💉💉💉💉💉💉💉💉💉💉*/
+                if (request.getParameter("Fuser")!= null){
+                    clientData.put("username", request.getParameter("Fuser"));
+                }
                 if (request.getParameter("Fpass1") != null) {
                     clientData.put("password", request.getParameter("Fpass1"));
                 }
@@ -101,12 +104,23 @@ public class PersonalArea extends HttpServlet {
 
                 /* update sul db */
                 CommonResponse updateRes = userRepo.updateUser(dbUser.getId(), clientData);
+                if(!updateRes.result){
+                    throw new Error("Error: impossibile effettuare le modifiche richieste");
+                }
+                /* se venisse cambiato username userei il nuovo per querare */
+                if (request.getParameter("Fuser")!= null){
+                    username = request.getParameter("Fuser");
+                }
                 /* aggiornamento utente appena aggionrato per garantire allineamento */
                 CommonResponse justUpdatedUser = userRepo.getUserByUsername(username);
                 if (!updateRes.result || !justUpdatedUser.result) {
                     throw new Error("Errore: impossibile salavre le modifiche richieste, ci spiace.");
                 }
                 dbUser = (UserModel)justUpdatedUser.payload;
+                /* Se viene cambiato username deve cambiare nella sessione */
+                if(!session.getAttribute("user").equals(dbUser.getUsername())){
+                    session.setAttribute("user", dbUser.getUsername());
+                }
             }
 
             /* arrivato qua ritorno lo user perche so di non essere in update */
@@ -116,6 +130,9 @@ public class PersonalArea extends HttpServlet {
             request.getRequestDispatcher("PersonalArea.jsp").forward(request, response);
         } catch (Exception e) {
             // forward to error page
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("ErrorHandle.jsp").forward(request, response);
+           System.out.println(e.getMessage());
         }
 
     }
