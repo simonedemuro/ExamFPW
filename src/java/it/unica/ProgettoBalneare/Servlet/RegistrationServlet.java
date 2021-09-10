@@ -10,6 +10,7 @@ import it.unica.ProgettoBalneare.Models.UserModel;
 import it.unica.ProgettoBalneare.Repos.UserRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import static java.util.Collections.list;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -74,7 +75,7 @@ public class RegistrationServlet extends HttpServlet {
                             request.getParameter("Fpass1"),
                             request.getParameter("Fname"),
                             request.getParameter("Fsurn"),
-                            request.getParameter("Fbirt"),
+                            LocalDate.parse(request.getParameter("Fbirt")),
                             request.getParameter("Fcode"),
                             request.getParameter("Fsex").charAt(0), // to char
                             request.getParameter("Fmail"),

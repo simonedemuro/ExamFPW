@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class UserRepo {
                 utente.setPassword(set.getString("password"));
                 utente.setName(set.getString("name"));
                 utente.setSurname(set.getString("surname"));
-                utente.setBirthday(set.getString("birthday"));
+                utente.setBirthday(LocalDate.parse(set.getString("birthday")));
                 utente.setFiscalNumber(set.getString("fiscalnumber"));
                 utente.setSex(set.getString("sex").charAt(0));
                 utente.setEmail(set.getString("email"));
@@ -99,7 +100,7 @@ public class UserRepo {
             stmt.setString(2, newUser.getPassword());
             stmt.setString(3, newUser.getName());
             stmt.setString(4, newUser.getSurname());
-            stmt.setString(5, newUser.getBirthday());
+            stmt.setObject(5, newUser.getBirthday());
             stmt.setString(6, newUser.getFiscalNumber());
             stmt.setString(7, newUser.getSex()+"");
             stmt.setString(8, newUser.getEmail());
@@ -150,7 +151,9 @@ public class UserRepo {
                 /* facciamo un eccezione per i campi che non sono stringa */
                 if (fieldName == "invoiceoptin")
                     stmt.setBoolean(parameterNumber, Boolean.parseBoolean((String)clientData.get(fieldName)));
-                else
+                else if (fieldName == "birthday"){
+                    stmt.setObject(parameterNumber, LocalDate.parse((String)clientData.get(fieldName)));
+                } else
                     stmt.setString(parameterNumber, (String)clientData.get(fieldName));
                 parameterNumber++;
             }

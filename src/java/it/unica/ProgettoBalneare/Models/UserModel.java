@@ -6,29 +6,25 @@
 package it.unica.ProgettoBalneare.Models;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  *
  * @author fpw
  */
-public class UserModel {
-    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
+public class UserModel {    
     private boolean isAdmin;
     private long Id;
     private String Username;
     private String Password;
     private String Name;
     private String Surname;
-    private String Birthday;
+    private LocalDate Birthday;
     private String FiscalNumber;
     private char sex;
     private String email;
     private String phone;
     private boolean invoiceOptIn;
     
-    public UserModel(String Username, String Password, String Name, String Surname, String Birthday, String FiscalNumber, char sex, String email, String phone, boolean invoiceOptIn) {
+    public UserModel(String Username, String Password, String Name, String Surname, LocalDate Birthday, String FiscalNumber, char sex, String email, String phone, boolean invoiceOptIn) {
         this.Username = Username;
         this.Password = Password;
         this.Name = Name;
@@ -92,18 +88,11 @@ public class UserModel {
         this.Surname = Surname;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return Birthday;
     }
-    
-    // Getting Bithday as a Date 
-    public LocalDate getBirthdayLD() {
-        LocalDate localDateBirthday = LocalDate.parse(this.Birthday, formatter);
-        return localDateBirthday;
-    }
 
-    // Setting Birthday as string but ensuring it is a valid date
-    public void setBirthday(String Birthday) {
+    public void setBirthday(LocalDate Birthday) {
         this.Birthday = Birthday;
     }
 

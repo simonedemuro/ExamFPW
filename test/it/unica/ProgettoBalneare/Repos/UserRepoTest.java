@@ -7,6 +7,7 @@ package it.unica.ProgettoBalneare.Repos;
 
 import it.unica.ProgettoBalneare.Models.CommonResponse;
 import it.unica.ProgettoBalneare.Models.UserModel;
+import java.time.LocalDate;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.util.Random;
@@ -30,7 +31,7 @@ public class UserRepoTest {
                 "password", 
                 "Ciccio", 
                 "Pasticcio", 
-                "25/03/1997", 
+                LocalDate.parse("1997-03-25"), 
                 "ASDFGHJKLZXCVBNM", 
                 'M', 
                 "cicciPasticci@alice.it", 
@@ -41,6 +42,15 @@ public class UserRepoTest {
         CommonResponse result = instance.addUser(newUser);
         Assert.assertTrue(result.result, result.message);
         
+    }
+    
+     @Test
+    public void testGetUser() {
+        System.out.println("getting Admin user");
+        
+        UserRepo instance = new UserRepo();
+        CommonResponse result = instance.getUserByUsername("demuro");
+        Assert.assertTrue(((UserModel)result.payload).getPassword().equals("65879"), "eh no");
     }
     
 }
