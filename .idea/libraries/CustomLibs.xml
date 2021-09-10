@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="CustomLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/CustomLibs/javaee-api-8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/CustomLibs/postgresql-42.2.23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/CustomLibs/json-taglib-0.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

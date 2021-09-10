@@ -82,15 +82,29 @@ section.pers-sec {
     display: flex;
     flex-direction: column;
 }
+.admin-add-slot,
 section.pers-sec .pers-sec-lvl1-col {
     display: flex;
     justify-content: center;
 }
+.admin-item,
 .pers-sec-lvl1-col .personal-info-form {
     flex-basis: 50%;
 }
+.centered-element {
+    margin-top: 1vh;
+}
+.center-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#add-slot-btn {
+    flex: 1;
+}
 /* Schermi larghi */
 @media screen and (max-width: 1200px){
+    .admin-item,
     .card-registration > div {
         flex-basis: 60%;
     }
@@ -100,15 +114,17 @@ section.pers-sec .pers-sec-lvl1-col {
 }
 /* Tablet e laptop piccoli */
 @media screen and (max-width: 800px){
-    .pers-sec-lvl1-col .personal-info-form {
+    .admin-item,
+    .card-registration > div {
         flex-basis: 80%;
     }
-    .card-registration > div {
+    .pers-sec-lvl1-col .personal-info-form {
         flex-basis: 80%;
     }
 }
 /* Telefoni datati o finestra rimpicciolita */
 @media screen and (max-width: 800px){
+    .admin-item,
     .card-registration > div {
         flex-basis: 100%;
     }

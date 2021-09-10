@@ -50,35 +50,42 @@ Author     : fpw
     <nav>
         <jsp:include page="NavSection.jsp"/>
     </nav>
-<%--    <c:if test="${not empty user}">--%>
+    <c:if test="${not empty user}">
         <section class="admin-add-slot">
-            <div>
-                <p> Add new slot: </p>
-            </div>
-            <div>
-                <form id="add-slot-form">
-                    <label for="Fdt">Data: </label>
-                    <input type="date" id="Fdt" name="Fdt" autocomplete="off" required>
-                    <p>Slot: </p>
-                    <label class="lbl-full-width">
-                        <input type="radio" name="Fslot" id="am" value="Mattina" > Mattina
-                    </label>
-                    <br>
-                    <label class="lbl-full-width">
-                        <input type="radio" name="Fslot" id="pm" value="Pomeriggio"> Pomeriggio
-                    </label>
-                    <label for="Naccomodation">Numero di posti disponibili: </label>
-                    <input class="magic-complete" type="number" id="Naccomodation" name="Naccomodation" placeholder="1" autocomplete="off" required>
-                    <div>
-                        <input id="doUpdate" type="submit" value="Update">
-                    </div>
-                </form>
+            <div class="admin-item">
+                <p> Add new slot*: </p>
+                <div>
+                    <form id="add-slot-form">
+                        <label for="Fdt">Data: </label>
+                        <input type="date" id="Fdt" name="Fdt" autocomplete="off" required>
+                        <p>Slot: </p>
+                        <label class="lbl-full-width">
+                            <input type="radio" name="Fslot" id="am" value="Mattina" checked> Mattina
+                        </label>
+                        <br>
+                        <label class="lbl-full-width">
+                            <input type="radio" name="Fslot" id="pm" value="Pomeriggio"> Pomeriggio
+                        </label>
+                        <label for="Naccomodation">Numero di posti disponibili: </label>
+                        <input class="magic-complete" type="number" id="Naccomodation" name="Naccomodation" placeholder="1" autocomplete="off" required>
+                        <div class="center-btn">
+                            <input class="centered-element" id="add-slot-btn" type="submit" value="Aggiungi">
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
+    </c:if>
 
-<%--    </c:if>--%>
-    <main>
-    </main>
+    <c:if test="${empty user}">
+    <!-- Card Login -->
+    <jsp:include page="LoginSection.jsp"/>
+    <!-- chiedo all'utente di loggarsi -->
+    <section class="section-error">
+        Per visitare questa pagina è necessario essere loggati
+    </section>
+    </c:if>
+
     <footer>
 
     </footer>
