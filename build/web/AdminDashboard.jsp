@@ -17,6 +17,7 @@ Author     : fpw
     <!-- Styling the site-->
     <link href="Style/SiteGeneral.css" rel="stylesheet">
     <link href="Style/SiteSections.css" rel="stylesheet">
+    <link href="Style/ReservationSection.css" rel="stylesheet">
     <!-- Online libs and styles from Google CDNs -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
@@ -75,9 +76,32 @@ Author     : fpw
                 </div>
             </div>
         </section>
+        <!-- se la tabella dei posti non è popolata reindirizzo a  -->
+        <c:if test="${empty calendarList}">
+            <c:redirect url ="getSlotCalendar" />
+        </c:if>
+        <section>
+            <div class="box-month">
+                <div class="box-day">
+                    <div class="box-day-num-circle">
+                        <p>C</p>
+                    </div>
+                    <div class="box-day-slot slot-AM">
+                        <p class="txt-slot">AM:</p>
+                        <p class="txt-num-places">10</p>
+                    </div>
+                    <div class="box-day-slot slot-PM">
+                        <p class="txt-slot">PM:</p>
+                        <p class="txt-num-places">5</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </c:if>
 
-    <c:if test="${empty user}">
+    <c:if test="${empty calendarList}">
+
+    </c:if>
     <!-- Card Login -->
     <jsp:include page="LoginSection.jsp"/>
     <!-- chiedo all'utente di loggarsi -->

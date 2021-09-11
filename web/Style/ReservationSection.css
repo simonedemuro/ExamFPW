@@ -1,0 +1,66 @@
+.box-month {
+    border: 2px solid;
+    padding: 20px;
+    width: 300px;
+    resize: both;
+    overflow: auto;
+}
+.box-day {
+    /* stile box stesso */
+    background-color: #00CCE3;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.3);
+
+    /* correggo l'overflow di box-day-num-circle */
+    margin: 80px 0 0 20px;
+
+    /* per allineare bene AM e PM */
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.box-day-slot {
+    background-color: #00AEE4;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.3);
+    margin: 8px 15px;
+    width:90%;
+    flex:1 0 0;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.slot-PM {
+    margin-bottom: 15px;
+    margin-top:5px;
+}
+.box-day-num-circle {
+    /* cerchio numero gg e suo stile */
+    border-radius:50%;
+    background-color: #00AEE4;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.3);
+
+    /* per mantenere aspect ratio */
+    width:50%;
+    height:0;
+    padding-bottom:50%;
+
+    /* sposto il cerchio a cavallo del div day */
+    position: relative;
+    transform: translate(0, -50%);
+
+    /* recupero lo spzio usato spostando in alto il cerchio */
+    margin-bottom: -20%;
+
+    /* centro la scritta */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box-day-num-circle > p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
