@@ -14,7 +14,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -56,6 +61,80 @@ public class BookingRepo {
             stmt.executeUpdate();
             return new CommonResponse(true,"Ok", null);
             
+        }catch(SQLException e){
+            Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());
+            return new CommonResponse(false,e.getMessage(),e);
+        } finally {
+            try{ set.close();} catch(Exception e){}
+            try{ stmt.close();} catch(Exception e){}
+            try{ conn.close();} catch(Exception e){}
+        }
+    }
+    public CommonResponse getSlotCalendar(LocalDate monthYear){
+        /* se cosi non fosse gia forzo ad usare il primo giorno del mese*/
+        monthYear = monthYear.withDayOfMonth(1);
+               
+        // Connection parameters
+        Connection conn= null;
+        PreparedStatement stmt = null;
+        ResultSet set = null; 
+        
+        try{
+            // Opening Connection
+            conn = DatabaseManager.getInstance().getDbConnection();
+            // Prepearing the query ordered by date and then day part so that it will be AM then PM
+            String query = "select \"Id\" , data, day_part, n_available from available_slot where extract('month' from data) = ? order by data, day_part";
+            stmt = conn.prepareStatement(query);
+            stmt.setObject(1, monthYear.getMonthValue());
+            
+            LOG.info("getting timeslots :\n" + stmt.toString());
+        
+            /* fetching dei risultati dalla query nel mio modello */
+            set = stmt.executeQuery();
+            Queue<Slot> querySlots = new LinkedList<Slot>();
+            if(set.next()){
+                /* creo lo slot e lo metto nel dizionario */
+                Slot slot = new Slot();
+                slot.setDate(LocalDate.parse(set.getString("data")));
+                slot.setNumPlaces(set.getInt("n_available"));
+                slot.setTimeslot(set.getString("day_part"));
+                
+                querySlots.add(slot);
+            }
+            /* il mio range di date è dal primo del mese all'ultimo */
+            LocalDate iterDate = monthYear;
+            LocalDate endDate = monthYear.withDayOfMonth(monthYear.lengthOfMonth());
+            
+            /* costruisco una collezione contenente tutti gli slot del mese ma vuoti */
+            ArrayList<Slot> fullSlots = new ArrayList<Slot>();
+            String ampm = "AM"; // variabile cambia tra AM e PM
+            while(iterDate.isBefore(endDate)) {
+                int day = iterDate.getDayOfMonth();
+                Slot s = new Slot(iterDate, ampm, 0); // slot da 0 posti
+                ampm = ampm.equals("AM")?"PM":"AM"; // inverto AM-PM e viceversa
+                fullSlots.add(s);
+                /* se sono nello slot pm cambio gionro */
+                if (ampm.equals("PM")) {
+                    iterDate.withDayOfMonth(day+1);
+                }
+            }
+            
+            /* Ora faccio una "join" per mettere i valori sugli slot presenti */
+            iterDate = monthYear;
+            while(!querySlots.isEmpty()) {
+                /* tolgo l'elemento da spostare dalla coda */
+                Slot dbSlot = querySlots.poll();
+                
+                /* prendo l'elemento corrispondente dalla lista completa */
+                Slot matchingSlot = fullSlots.stream()
+                        .filter(x -> x.getDate().getDayOfMonth() == dbSlot.getDate().getDayOfMonth()
+                        && x.getTimeslot() == dbSlot.getTimeslot())
+                        .findAny()
+                        .orElse(null);
+                /* setto al suo interno il numero di slot disponibili */
+                matchingSlot.setNumPlaces(dbSlot.getNumPlaces());
+            }
+            return new CommonResponse(true, "Ok", fullSlots);
         }catch(SQLException e){
             Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());
             return new CommonResponse(false,e.getMessage(),e);

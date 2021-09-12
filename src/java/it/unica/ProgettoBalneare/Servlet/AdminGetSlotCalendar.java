@@ -12,12 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author fpw
  */
-@WebServlet(name = "AdminGetSlotCalendar", urlPatterns = {"/AdminGetSlotCalendar"})
+@WebServlet(name = "AdminGetSlotCalendar", urlPatterns = {"/getSlotCalendar"})
 public class AdminGetSlotCalendar extends HttpServlet {
 
     /**
@@ -32,18 +33,26 @@ public class AdminGetSlotCalendar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminGetSlotCalendar</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminGetSlotCalendar at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            /* prendo dati dall'utente e valido */
+            HttpSession session = request.getSession(false);
+            String username = session != null ? (String) session.getAttribute("user") : null;
+            if (username == null) {
+                throw new Exception("Errore: si sta provando ad entrare nella sezione personale senza essere loggati, probabilmente la sessione è scaduta");
+            }
+            
+            
+
+            /* recupero i dati dal db */
+        } catch (Exception e) {
+            // forward to error page
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("ErrorHandle.jsp").forward(request, response);
+            System.out.println(e.getMessage());
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
