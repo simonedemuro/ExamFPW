@@ -50,13 +50,16 @@ Author     : fpw
             </div>
         </section>
     </c:if>
+
+    <nav>
+        <jsp:include page="NavSection.jsp"/>
+    </nav>
+
     <c:if test="${empty user}">
         <!-- Card Login -->
         <jsp:include page="LoginSection.jsp"/>
     </c:if>
-    <nav>
-        <jsp:include page="NavSection.jsp"/>
-    </nav>
+
     <c:if test="${not empty user}">
         <section class="admin-add-slot">
             <div class="admin-item">
@@ -87,6 +90,11 @@ Author     : fpw
             <c:redirect url ="getSlotCalendar"/>
         </c:if>
         <section>
+            <div class="month-selector">
+                <span class="month-arrow left-arr">⬅️</span>
+                <h2 class="month-selector-txt"> ${currentDate} </h2>
+                <span class="month-arrow right-arr">➡️</span>
+            </div>
             <div class="box-month">
                 <!-- previa chiamata a back end, riempio il template box-day con tutti gli slot del mese selezionato -->
                 <c:if test="${not empty fullSlots}">

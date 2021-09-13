@@ -39,7 +39,7 @@ $(function() {
                         $("#msgBar").removeClass("msg-info");
                         /* reload per far funzionare JSP */
                         location.reload();
-                    }, 3000);
+                    }, 1000);
                 }
                 else {
                     // Messaggio di errore

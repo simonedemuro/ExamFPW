@@ -50,9 +50,30 @@ public class AdminGetSlotCalendar extends HttpServlet {
             
             /* data di visualizzazione presa dalla sessione, se assente mese corrente */
             String strDate =(String) session.getAttribute("currentDate");
-            LocalDate visualizedDate = LocalDate.now().withDayOfMonth(1);
+            LocalDate visualizedDate;
             if (strDate != null && !strDate.isEmpty()){
                 visualizedDate = LocalDate.parse(strDate);
+                session.setAttribute("currentDate", strDate);
+            } else {
+                visualizedDate = LocalDate.now().withDayOfMonth(1);
+                session.setAttribute("currentDate", visualizedDate.toString());
+            }
+            
+            /* Gestisco le frecccette di navigazione per spostarmi nel mese 
+            *  se ricevo il parametro azione allora cambio mese in sessione */
+            String action = request.getParameter("navigationAction");
+            if(action != null && !action.isEmpty()) {
+                if(action.equals("nextMonth")){
+                    session.setAttribute("currentDate", 
+                            visualizedDate.withMonth(visualizedDate.getMonthValue()+1).toString());
+                    /* INTERROMPO qua e non vado avanti, tanto sarò redirezionato nuovamente qua per i dati */
+                    return;
+                } else if(action.equals("previousMonth")) {
+                    session.setAttribute("currentDate", 
+                            visualizedDate.withMonth(visualizedDate.getMonthValue()-1).toString());
+                    /* INTERROMPO qua e non vado avanti, tanto sarò redirezionato nuovamente qua per i dati */
+                    return;
+                }
             }
             
             /* recupero i dati dal db e se non ci sono problemi restituisco la pagina renderizzata con jsp*/

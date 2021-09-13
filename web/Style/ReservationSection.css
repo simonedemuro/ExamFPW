@@ -1,3 +1,13 @@
+.month-selector {
+    text-align: center;
+}
+.month-selector-txt {
+    display: inline;
+}
+.month-arrow:hover {
+    font-size: 1.2em;
+    cursor: pointer;
+}
 .box-month {
     padding: 20px;
     resize: vertical;
