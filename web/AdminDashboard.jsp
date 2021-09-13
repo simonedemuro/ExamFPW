@@ -50,6 +50,10 @@ Author     : fpw
             </div>
         </section>
     </c:if>
+    <c:if test="${empty user}">
+        <!-- Card Login -->
+        <jsp:include page="LoginSection.jsp"/>
+    </c:if>
     <nav>
         <jsp:include page="NavSection.jsp"/>
     </nav>
@@ -84,19 +88,7 @@ Author     : fpw
         </c:if>
         <section>
             <div class="box-month">
-                <div class="box-day">
-                    <div class="box-day-num-circle">
-                        <p>C</p>
-                    </div>
-                    <div class="box-day-slot slot-AM">
-                        <p class="txt-slot">AM:</p>
-                        <p class="txt-num-places">10</p>
-                    </div>
-                    <div class="box-day-slot slot-PM">
-                        <p class="txt-slot">PM:</p>
-                        <p class="txt-num-places">5</p>
-                    </div>
-                </div>
+                <!-- previa chiamata a back end, riempio il template box-day con tutti gli slot del mese selezionato -->
                 <c:if test="${not empty fullSlots}">
                     <c:forEach var="day" items="${fullSlots}">
                         <div class="box-day">
@@ -117,14 +109,11 @@ Author     : fpw
             </div>
         </section>
     </c:if>
-    <!-- Card Login -->
-    <jsp:include page="LoginSection.jsp"/>
-    <!-- chiedo all'utente di loggarsi -->
-    <section class="section-error">
-        Per visitare questa pagina è necessario essere loggati
-    </section>
-
-
+    <c:if test="${empty user}">
+        <section class="section-error">
+            Per visitare questa pagina è necessario essere loggati
+        </section>
+    </c:if>
     <footer>
 
     </footer>

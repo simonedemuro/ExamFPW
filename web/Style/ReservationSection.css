@@ -1,17 +1,18 @@
 .box-month {
-    border: 2px solid;
     padding: 20px;
-    width: 300px;
-    resize: both;
+    resize: vertical;
     overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 .box-day {
     /* stile box stesso */
     background-color: #00CCE3;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.3);
+    min-width: 115px;
 
     /* correggo l'overflow di box-day-num-circle */
-    margin: 80px 0 0 20px;
+    margin: 3.5% 0 0 20px;
 
     /* per allineare bene AM e PM */
     display: flex;
