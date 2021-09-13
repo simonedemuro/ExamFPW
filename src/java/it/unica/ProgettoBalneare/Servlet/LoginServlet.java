@@ -54,8 +54,8 @@ public class LoginServlet extends HttpServlet {
             /* Controllo la password corrisponda */
             if(dbUser != null && dbUser.getPassword().equals(pass)){ 
                 session.setAttribute("user", dbUser.getUsername());
-                session.setAttribute("userRole", dbUser.isIsAdmin()?"admin":"guest");
-                session.setMaxInactiveInterval(30); // timeout scadenza sessione
+                session.setAttribute("userRole", dbUser.isIsAdmin()?"admin":"simple");
+                session.setMaxInactiveInterval(1800); // timeout scadenza sessione 30 minuti
                 response.getWriter().write("Login effettuato correttamente");
                 //response.sendRedirect("index.jsp");
             }
