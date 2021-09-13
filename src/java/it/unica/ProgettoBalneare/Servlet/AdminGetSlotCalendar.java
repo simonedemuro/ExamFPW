@@ -5,8 +5,14 @@
  */
 package it.unica.ProgettoBalneare.Servlet;
 
+import it.unica.ProgettoBalneare.Models.CommonResponse;
+import it.unica.ProgettoBalneare.Models.Slot;
+import it.unica.ProgettoBalneare.Models.SlotViewModel;
+import it.unica.ProgettoBalneare.Repos.BookingRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +38,6 @@ public class AdminGetSlotCalendar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -43,11 +48,27 @@ public class AdminGetSlotCalendar extends HttpServlet {
                 throw new Exception("Errore: si sta provando ad entrare nella sezione personale senza essere loggati, probabilmente la sessione è scaduta");
             }
             
+            /* data di visualizzazione presa dalla sessione, se assente mese corrente */
+            String strDate =(String) session.getAttribute("currentDate");
+            LocalDate visualizedDate = LocalDate.now().withDayOfMonth(1);
+            if (strDate != null && !strDate.isEmpty()){
+                visualizedDate = LocalDate.parse(strDate);
+            }
             
+            /* recupero i dati dal db e se non ci sono problemi restituisco la pagina renderizzata con jsp*/
+            CommonResponse res = BookingRepo.getInstance().getSlotCalendar(visualizedDate);
+            if(res.result) {
+                ArrayList<SlotViewModel> a = (ArrayList<SlotViewModel>) res.payload;
+                request.setAttribute("fullSlots", a);
 
-            /* recupero i dati dal db */
+                request.getRequestDispatcher("AdminDashboard.jsp").forward(request, response);
+            } else {
+                /* in caso di errore rilancio l'eccezione per visualizzare il messaggio nella pagina di errore */
+                throw new Exception(res.message);
+            }
+            
         } catch (Exception e) {
-            // forward to error page
+            /* forward to error page */
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher("ErrorHandle.jsp").forward(request, response);
             System.out.println(e.getMessage());

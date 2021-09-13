@@ -8,6 +8,7 @@ package it.unica.ProgettoBalneare.Repos;
 import it.unica.ProgettoBalneare.Db.DatabaseManager;
 import it.unica.ProgettoBalneare.Models.CommonResponse;
 import it.unica.ProgettoBalneare.Models.Slot;
+import it.unica.ProgettoBalneare.Models.SlotViewModel;
 import it.unica.ProgettoBalneare.Models.UserModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -92,7 +93,7 @@ public class BookingRepo {
             /* fetching dei risultati dalla query nel mio modello */
             set = stmt.executeQuery();
             Queue<Slot> querySlots = new LinkedList<Slot>();
-            if(set.next()){
+            while(set.next()){
                 /* creo lo slot e lo metto nel dizionario */
                 Slot slot = new Slot();
                 slot.setDate(LocalDate.parse(set.getString("data")));
@@ -106,17 +107,16 @@ public class BookingRepo {
             LocalDate endDate = monthYear.withDayOfMonth(monthYear.lengthOfMonth());
             
             /* costruisco una collezione contenente tutti gli slot del mese ma vuoti */
-            ArrayList<Slot> fullSlots = new ArrayList<Slot>();
-            String ampm = "AM"; // variabile cambia tra AM e PM
+            ArrayList<SlotViewModel> fullSlots = new ArrayList<SlotViewModel>();
+            String timeAmPm = "AM"; // variabile cambia tra AM e PM
             while(iterDate.isBefore(endDate)) {
-                int day = iterDate.getDayOfMonth();
-                Slot s = new Slot(iterDate, ampm, 0); // slot da 0 posti
-                ampm = ampm.equals("AM")?"PM":"AM"; // inverto AM-PM e viceversa
+                int currDay = iterDate.getDayOfMonth();
+                SlotViewModel s = new SlotViewModel(currDay, timeAmPm, 0, 0){};
                 fullSlots.add(s);
-                /* se sono nello slot pm cambio gionro */
-                if (ampm.equals("PM")) {
-                    iterDate.withDayOfMonth(day+1);
-                }
+                
+                /* vado avanti di un girno e inverte am pm e viceversa */
+                iterDate = iterDate.withDayOfMonth(currDay+1);
+                timeAmPm = timeAmPm.equals("AM")?"PM":"AM"; // inverto AM-PM e viceversa
             }
             
             /* Ora faccio una "join" per mettere i valori sugli slot presenti */
@@ -124,15 +124,20 @@ public class BookingRepo {
             while(!querySlots.isEmpty()) {
                 /* tolgo l'elemento da spostare dalla coda */
                 Slot dbSlot = querySlots.poll();
-                
+
                 /* prendo l'elemento corrispondente dalla lista completa */
-                Slot matchingSlot = fullSlots.stream()
-                        .filter(x -> x.getDate().getDayOfMonth() == dbSlot.getDate().getDayOfMonth()
-                        && x.getTimeslot() == dbSlot.getTimeslot())
+                SlotViewModel matchingSlot = fullSlots.stream()
+                        .filter(x -> x.day == dbSlot.getDate().getDayOfMonth())
                         .findAny()
                         .orElse(null);
-                /* setto al suo interno il numero di slot disponibili */
-                matchingSlot.setNumPlaces(dbSlot.getNumPlaces());
+                
+                /* controllo se am o pm e setto il numero di slot disponibili 
+                 * nel posto giusto */
+                if(dbSlot.getTimeslot().equals("AM")) {
+                    matchingSlot.numAm = dbSlot.getNumPlaces();
+                } else if(dbSlot.getTimeslot().equals("PM")) {
+                    matchingSlot.numPm = dbSlot.getNumPlaces();
+                }
             }
             return new CommonResponse(true, "Ok", fullSlots);
         }catch(SQLException e){

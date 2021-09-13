@@ -9,7 +9,7 @@
     <a href="PersonalArea.jsp" class="btn-nav"> Area personale</a>
 </c:if>
 <c:if test="${not empty user && userRole == 'admin'}">
-    <a class="btn-nav"> Gestione prenotazioni</a>
+    <a href="AdminDashboard.jsp" class="btn-nav"> Gestione slot</a>
 </c:if>
 <c:if test="${not empty user && userRole == 'guest'}">
     <a class="btn-nav"> Gestione fatture</a>

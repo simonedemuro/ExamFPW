@@ -6,6 +6,8 @@ Author     : fpw
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="it.unica.ProgettoBalneare.Models.SlotViewModel"%>
 </html>
 <!DOCTYPE html>
 <html>
@@ -77,8 +79,8 @@ Author     : fpw
             </div>
         </section>
         <!-- se la tabella dei posti non è popolata reindirizzo a  -->
-        <c:if test="${empty calendarList}">
-            <c:redirect url ="getSlotCalendar" />
+        <c:if test="${empty fullSlots}">
+            <c:redirect url ="getSlotCalendar"/>
         </c:if>
         <section>
             <div class="box-month">
@@ -95,12 +97,25 @@ Author     : fpw
                         <p class="txt-num-places">5</p>
                     </div>
                 </div>
+                <c:if test="${not empty fullSlots}">
+                    <c:forEach var="day" items="${fullSlots}">
+                        <div class="box-day">
+                            <div class="box-day-num-circle">
+                                <p>${day.getDay()}</p>
+                            </div>
+                            <div class="box-day-slot slot-AM">
+                                <p class="txt-slot">AM:</p>
+                                <p class="txt-num-places">${day.getNumAm()}</p>
+                            </div>
+                            <div class="box-day-slot slot-PM">
+                                <p class="txt-slot">PM:</p>
+                                <p class="txt-num-places">${day.getNumPm()}</p>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:if>
             </div>
         </section>
-    </c:if>
-
-    <c:if test="${empty calendarList}">
-
     </c:if>
     <!-- Card Login -->
     <jsp:include page="LoginSection.jsp"/>
@@ -108,7 +123,7 @@ Author     : fpw
     <section class="section-error">
         Per visitare questa pagina è necessario essere loggati
     </section>
-    </c:if>
+
 
     <footer>
 

@@ -27,7 +27,7 @@ public class SlotTest {
     public void testSlot() {
         System.out.println("test add slot");
         
-        Slot reservation = new Slot(LocalDate.parse("2021-08-10"), "PM", 5);
+        Slot reservation = new Slot(LocalDate.parse("2021-08-02"), "PM", 5);
         CommonResponse result = BookingRepo.getInstance().addSlot(reservation);
         Assert.assertTrue(result.result, "eh no");
     }
@@ -38,6 +38,7 @@ public class SlotTest {
         
         LocalDate August = LocalDate.parse("2021-08-01");
         CommonResponse result = BookingRepo.getInstance().getSlotCalendar(August);
+        
         Assert.assertTrue(result.result && !((ArrayList<Slot>)result.payload).isEmpty(), "eh no");
     }
     
