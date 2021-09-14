@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/fpw/NetBeansProjects/ExamFPW/test/it/unica/ProgettoBalneare/Repos/SlotTest.java</file>
             <file>file:/home/fpw/NetBeansProjects/ExamFPW/src/java/it/unica/ProgettoBalneare/Servlet/AdminGetSlotCalendar.java</file>
+            <file>file:/home/fpw/NetBeansProjects/ExamFPW/src/java/it/unica/ProgettoBalneare/Models/Slot.java</file>
+            <file>file:/home/fpw/NetBeansProjects/ExamFPW/src/java/it/unica/ProgettoBalneare/Servlet/LoginServlet.java</file>
             <file>file:/home/fpw/NetBeansProjects/ExamFPW/web/AdminDashboard.jsp</file>
             <file>file:/home/fpw/NetBeansProjects/ExamFPW/src/java/it/unica/ProgettoBalneare/Repos/BookingRepo.java</file>
+            <file>file:/home/fpw/NetBeansProjects/ExamFPW/src/java/it/unica/ProgettoBalneare/Models/SlotViewModel.java</file>
         </group>
     </open-files>
 </project-private>

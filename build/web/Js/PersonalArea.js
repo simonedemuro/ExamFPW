@@ -77,6 +77,5 @@ $(function() {
 
        console.log({'sex':sex,'invoice':invoice});
     }());
-
 });
 

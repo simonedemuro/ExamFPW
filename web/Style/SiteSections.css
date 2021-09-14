@@ -7,12 +7,14 @@ and open the template in the editor.
     Created on : Sep 3, 2021, 3:46:14 PM
     Author     : fpw
 */
-.card-registration {
+.card-registration,
+.book-slot-section {
     /* centered registration form */
     display: flex;
     justify-content: center;
 }
-.card-registration > div {
+.card-registration > div,
+.book-slot-section > div {
     flex-basis: 50%;
     overflow: hidden;
 }
@@ -115,7 +117,8 @@ section.pers-sec .pers-sec-lvl1-col {
 /* Tablet e laptop piccoli */
 @media screen and (max-width: 800px){
     .admin-item,
-    .card-registration > div {
+    .card-registration > div,
+    .book-slot-section > div {
         flex-basis: 80%;
     }
     .pers-sec-lvl1-col .personal-info-form {
@@ -125,7 +128,8 @@ section.pers-sec .pers-sec-lvl1-col {
 /* Telefoni datati o finestra rimpicciolita */
 @media screen and (max-width: 800px){
     .admin-item,
-    .card-registration > div {
+    .card-registration > div,
+    .book-slot-section > div {
         flex-basis: 100%;
     }
     .pers-sec-lvl1-col .personal-info-form {

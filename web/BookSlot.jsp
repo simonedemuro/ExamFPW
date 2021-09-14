@@ -20,6 +20,7 @@
     <script src="Js/Registration.js"></script>
     <script src="Js/Login.js"></script>
     <script src="Js/SitePopups.js"></script>
+    <script src="Js/BookSlot.js"></script>
 </head>
 <body>
 <div class="site">
@@ -46,6 +47,46 @@
     <c:if test="${empty user}">
         <!-- Card Login -->
         <jsp:include page="LoginSection.jsp"/>
+    </c:if>
+
+    <c:if test="${not empty user}">
+        <section class="book-slot-section">
+            <div>
+                <h2> Qua potrai prenotare i posti per te e i tuoi amici </h2>
+
+                <div>
+                    <form id="book-slots">
+                        <label for="Ffrom">Dal: </label>
+                        <input type="date" id="Ffrom" name="Ffrom" placeholder="Seleziona data di inizio" autocomplete="off" required>
+
+                        <p>Slot: </p>
+                        <label class="lbl-full-width">
+                            <input type="radio" name="FfromSlot" id="FfromSlotAm" value="Mattina" checked> Mattina
+                        </label>
+                        <br>
+                        <label class="lbl-full-width">
+                            <input type="radio" name="FfromSlot" id="FfromSlotPm" value="Pomeriggio"> Pomeriggio
+                        </label>
+
+                        <label for="Fto">Al (lasciare in bianco in caso di prenotazione giorno unico) : </label>
+                        <input type="date" id="Fto" name="Fto" placeholder="Seleziona data di fine" autocomplete="off">
+
+                        <p>Slot: </p>
+                        <label class="lbl-full-width">
+                            <input type="radio" name="FtoSlot" id="FtoSlotAm" value="Mattina" checked> Mattina
+                        </label>
+                        <br>
+                        <label class="lbl-full-width">
+                            <input type="radio" name="FtoSlot" id="FtoSlotPm" value="Pomeriggio"> Pomeriggio
+                        </label>
+
+                        <label for="Fnumplaces">Numero di posti disponibili: </label>
+                        <input type="number" id="Fnumplaces" name="Fnumplaces" placeholder="1" autocomplete="off" required>
+                        <input id="btnBook" type="submit" value="Prenota">
+                    </form>
+                </div>
+            </div>
+        </section>
     </c:if>
     <main>
     </main>
