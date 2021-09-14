@@ -15,6 +15,15 @@ public class Slot {
     private LocalDate date;
     private String timeslot;
     private int numPlaces;
+    private long Id;
+
+    public long getId() {
+        return Id;
+    }
+
+    public void setId(long Id) {
+        this.Id = Id;
+    }
 
     public Slot(LocalDate date, String timeslot, int numPlaces) {
         this.date = date;

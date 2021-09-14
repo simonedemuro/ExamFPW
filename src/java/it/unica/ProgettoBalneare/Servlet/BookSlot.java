@@ -7,9 +7,11 @@ package it.unica.ProgettoBalneare.Servlet;
 
 import it.unica.ProgettoBalneare.Models.CommonResponse;
 import it.unica.ProgettoBalneare.Models.UserModel;
+import it.unica.ProgettoBalneare.Repos.BookingRepo;
 import it.unica.ProgettoBalneare.Repos.UserRepo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author fpw
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "BookSlot", urlPatterns = {"/bookSlot"})
+public class BookSlot extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,38 +39,29 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        HttpSession session = request.getSession(); // crea una nuova sessione o recupera quella esistente
-        String user = request.getParameter("Fuser"); // recupera i parametri passati dal client (login.jsp)
-        String pass = request.getParameter("Fpass");
-        
-        try{
-            /* prendo utente dal DB */
-            CommonResponse userDBResult = UserRepo.getInstance().getUserByUsername(user);
-            // controllo sia stato trovato altrimenti lo gestisco come errore
-            if (!userDBResult.result){
-                throw new Exception("Errore durante il recupero dell'utente: " + userDBResult.message);
-            } 
-            // cast da risposta a oggetto Utente
-            UserModel dbUser = (UserModel)userDBResult.payload;
-            
-            /* Controllo la password corrisponda */
-            if(dbUser != null && dbUser.getPassword().equals(pass)){ 
-                session.setAttribute("user", dbUser.getUsername());
-                session.setAttribute("userRole", dbUser.isIsAdmin()?"admin":"simple");
-                session.setAttribute("userId", dbUser.getId());
-                session.setMaxInactiveInterval(1800); // timeout scadenza sessione 30 minuti
-                response.getWriter().write("Login effettuato correttamente");
-                //response.sendRedirect("index.jsp");
+        try {
+            /* prendo dati dall'utente e verifico che sia loggato e che sia admin */
+            HttpSession session = request.getSession(false);
+            String username = session != null ? (String) session.getAttribute("user") : null;
+            String userRole = session != null ? (String) session.getAttribute("userRole") : null;
+            long userId = session != null ? (long)session.getAttribute("userId") : -1;
+            if (username == null || userRole == null || userId == -1) {
+                throw new Exception("Errore: si sta provando ad entrare nella sezione personale senza essere loggati o senza essere autorizzati");
             }
-            else
-                throw new Exception("Errore: password errata");
             
-        }catch(Exception e){
-            session.invalidate();
-            request.setAttribute("errorMessage", e.getMessage()); 
-            request.setAttribute("link", "login.jsp");
-            response.getWriter().write(e.getMessage());
-            //request.getRequestDispatcher("error.jsp").forward(request, response); 
+            /* prendo e controllo l'input passatomi dal form */
+            LocalDate fromDate = LocalDate.parse(request.getParameter("Ffrom"));
+            String fromAmPm = request.getParameter("FfromSlot").equals("Mattina")?"AM":"PM";
+            LocalDate toDate = LocalDate.parse(request.getParameter("Fto"));
+            String toAmPm = request.getParameter("FtoSlot").equals("Mattina")?"AM":"PM";
+            int numReservedSlots = Integer.parseInt(request.getParameter("Fnumplaces"));
+            
+
+            CommonResponse res = BookingRepo.getInstance().bookSlots(fromDate, fromAmPm, toDate, toAmPm, numReservedSlots, userId);
+            
+            response.getWriter().write(res.message);
+        } catch (Exception e) {
+            response.getWriter().write("Errore: " + e.getMessage());
         }
     }
 
