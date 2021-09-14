@@ -64,15 +64,11 @@ public class AdminGetSlotCalendar extends HttpServlet {
             String action = request.getParameter("navigationAction");
             if(action != null && !action.isEmpty()) {
                 if(action.equals("nextMonth")){
-                    session.setAttribute("currentDate", 
-                            visualizedDate.withMonth(visualizedDate.getMonthValue()+1).toString());
-                    /* INTERROMPO qua e non vado avanti, tanto sarò redirezionato nuovamente qua per i dati */
-                    return;
+                    visualizedDate = visualizedDate.withMonth(visualizedDate.getMonthValue()+1);
+                    session.setAttribute("currentDate", visualizedDate.toString());
                 } else if(action.equals("previousMonth")) {
-                    session.setAttribute("currentDate", 
-                            visualizedDate.withMonth(visualizedDate.getMonthValue()-1).toString());
-                    /* INTERROMPO qua e non vado avanti, tanto sarò redirezionato nuovamente qua per i dati */
-                    return;
+                    visualizedDate = visualizedDate.withMonth(visualizedDate.getMonthValue()-1);
+                    session.setAttribute("currentDate", visualizedDate.toString());
                 }
             }
             
@@ -82,7 +78,7 @@ public class AdminGetSlotCalendar extends HttpServlet {
                 ArrayList<SlotViewModel> a = (ArrayList<SlotViewModel>) res.payload;
                 request.setAttribute("fullSlots", a);
 
-                request.getRequestDispatcher("AdminDashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("CalendarSection.jsp").forward(request, response);
             } else {
                 /* in caso di errore rilancio l'eccezione per visualizzare il messaggio nella pagina di errore */
                 throw new Exception(res.message);

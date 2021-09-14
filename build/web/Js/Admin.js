@@ -1,4 +1,12 @@
 $(function() {
+    /* per rendere condiviso il codice tra le pagine chiamo cosi la servlet
+    *  e interagisco con la DOM a mano aggiungendo il calendario */
+    (function () {
+        $.post("getSlotCalendar", {"sender":"AdminDashboard"}, function (htmlOfTheCalendar) {
+            attachCalendar(htmlOfTheCalendar);
+        });
+    })();
+
     // no lettere nel numero posti
     $('#Naccomodation').keypress(function(e){
         // non faccio passare i keystrokes che non sono compresi tra i valori ascii
@@ -26,20 +34,26 @@ $(function() {
         });
     });
 
-    // mese successivo
-    /* la gestione del mese successivo usa la stessa servlet ma facendo uso del parametro navigation action
-    *  la servlet cambiarà solamente mese poi al successo della richiesta caricherà nuovamente la pagina grazie alla
-    *  redirect. Si sarebbe potuto scrivere sulla DOM direttamente la risposta ma mi sembrava meglio fare così. */
-    $('.month-arrow.left-arr').click(function (e) {
-        $.post("getSlotCalendar", {"navigationAction" : "previousMonth"}, function (data) {
-            /* cambio mese in sessione e ricarico la pagina col form aggiornato */
-            location.href = "AdminDashboard.jsp";
-        });
-    });
-    $('.month-arrow.right-arr').click(function (e) {
-        $.post("getSlotCalendar", {"navigationAction" : "nextMonth"}, function (data) {
-            /* cambio mese in sessione e ricarico la pagina col form aggiornato */
-            location.href = "AdminDashboard.jsp";
-        });
-    });
 });
+
+/* la gestione del precedente e mese successivo usa la stessa servlet ma facendo uso del parametro navigation action
+*  poiché il navigatore di mesi è attaccato dinamicamente non è possibile attaccare gli eventi nel document ready
+*  per questo motivo l'evento click è direttamente nell'heml dei pulsanti */
+function prevMonth () {
+    $.post("getSlotCalendar", {"navigationAction" : "previousMonth"}, function (htmlOfTheCalendar) {
+        attachCalendar(htmlOfTheCalendar);
+    });
+}
+function nextMonth() {
+    $.post("getSlotCalendar", {"navigationAction" : "nextMonth"}, function (htmlOfTheCalendar) {
+        attachCalendar(htmlOfTheCalendar);
+    });
+}
+/* gestisce la sostituzione del calendario vecchio con il nuovo */
+function attachCalendar(htmlOfTheCalendar) {
+    /* rimuovo il vecchio calendario se presente */
+    $('.calendar-section').remove();
+    /* attacco il nuovo */
+    $('section.admin-add-slot').after(htmlOfTheCalendar);
+    showMessage("Calendario caricato", 1000, false);
+}

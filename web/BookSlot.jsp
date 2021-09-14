@@ -87,6 +87,38 @@
                 </div>
             </div>
         </section>
+
+        <!-- se la tabella dei posti non è popolata reindirizzo a  -->
+        <c:if test="${empty fullSlots}">
+            <c:redirect url ="getSlotCalendar"/>
+        </c:if>
+        <section>
+            <div class="month-selector">
+                <span class="month-arrow left-arr">⬅️</span>
+                <h2 class="month-selector-txt"> ${currentDate} </h2>
+                <span class="month-arrow right-arr">➡️</span>
+            </div>
+            <div class="box-month">
+                <!-- previa chiamata a back end, riempio il template box-day con tutti gli slot del mese selezionato -->
+                <c:if test="${not empty fullSlots}">
+                    <c:forEach var="day" items="${fullSlots}">
+                        <div class="box-day">
+                            <div class="box-day-num-circle">
+                                <p>${day.getDay()}</p>
+                            </div>
+                            <div class="box-day-slot slot-AM">
+                                <p class="txt-slot">AM:</p>
+                                <p class="txt-num-places">${day.getNumAm()}</p>
+                            </div>
+                            <div class="box-day-slot slot-PM">
+                                <p class="txt-slot">PM:</p>
+                                <p class="txt-num-places">${day.getNumPm()}</p>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:if>
+            </div>
+        </section>
     </c:if>
     <main>
     </main>
