@@ -38,10 +38,14 @@ public class AdminAddSlot extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            /* prendo la sessione e controllo sia ok */
+            /* prendo la sessione e controllo l'utente loggato sia l'admin */
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") == null)
-                throw new Exception("Sessione scaduta");
+            String username = session != null ? (String) session.getAttribute("user") : null;
+            String userRole = session != null ? (String) session.getAttribute("userRole") : null;
+            long userId = session != null ? (long)session.getAttribute("userId") : -1;
+            if (username == null || userRole == null || !userRole.equals("admin") || userId == -1) {
+                throw new Exception("Errore: si sta provando ad entrare nella sezione personale senza essere loggati o senza essere autorizzati");
+            }    
         
             /* prendo dati del form utente e li metto nel modello da passare al repo*/
             Slot reservation = new Slot(

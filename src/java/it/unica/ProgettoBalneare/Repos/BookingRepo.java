@@ -45,21 +45,41 @@ public class BookingRepo {
         Connection conn= null;
         PreparedStatement stmt = null;
         ResultSet set = null; 
+        Long slotId = null;
         
         try{
             // Opening Connection
             conn = DatabaseManager.getInstance().getDbConnection();
-            // Prepearing the query
-            String query = "insert into available_slot (data, day_part, n_available) values (?, ?, ?);";
+            // Controllo se esiste gia uno slot e prendo l'id per farci un update sopra
+            String query = "select \"Id\" from available_slot where data = ? and day_part = ?;";
             stmt = conn.prepareStatement(query);
             stmt.setObject(1, reservation.getDate());
             stmt.setString(2, reservation.getTimeslot());
-            stmt.setInt(3, reservation.getNumPlaces());
+            // mando la query a db 
+            set = stmt.executeQuery();
+            // fetcho l'id che ho ricevuto
+            if (set.next()) {
+                slotId = set.getLong("Id");
+            }
             
-            LOG.info("adding timeslot :\n" + stmt.toString());
-        
-            /* executing and returning success */
-            stmt.executeUpdate();
+            /* se lo slot esiste già aggiungo i posti richiesti */
+            if(slotId != null) {
+                query = "update available_slot set n_available = n_available + ? where \"Id\" = ?;";
+                stmt = conn.prepareStatement(query);
+                stmt.setInt(1, reservation.getNumPlaces());
+                stmt.setLong(2, slotId);
+                stmt.executeUpdate();
+            } else {
+                /* se lo slot non esisteva prima allora lo inserisco */
+                query = "insert into available_slot (data, day_part, n_available) values (?, ?, ?);";
+                stmt = conn.prepareStatement(query);
+                stmt.setObject(1, reservation.getDate());
+                stmt.setString(2, reservation.getTimeslot());
+                stmt.setInt(3, reservation.getNumPlaces());
+
+                /* executing and returning success */
+                stmt.executeUpdate();
+            }
             return new CommonResponse(true,"Ok", null);
             
         }catch(SQLException e){
