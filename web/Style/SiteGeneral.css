@@ -126,9 +126,9 @@ input[type=text]:invalid{
 }
 .site {
     margin: auto; /* Center the main div */
-    border: 3px solid rgba(255,255,255,0.1); /* change .01 alpha to something else then*/
-    padding: 20px;
+    padding: 0.6%; /* in percentuale non spreca spazio su dispositivi piccoli come telefoni */
     background-color: #009bd6;/*#1B9CE5;*/
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.3);
 
     /* Flexbox layout */
     display: flex;
@@ -146,6 +146,7 @@ nav .btn-nav, .a-to-btn{
     text-align: center;
     font-weight: bold;
     text-decoration: none;
+    box-shadow: 8px 6px 10px rgba(0,0,0,0.1); /* leggera ombra rilievo */
 }
 main {
 }
@@ -158,11 +159,12 @@ header, footer {
     overflow: hidden;
 }
 header, footer, section, article, nav {
-    border: 3px solid rgba(255,255,255,0.1); /* change .01 alpha to something else then*/
+    /*border: 3px solid rgba(255,255,255,0.1);  change .01 alpha to something else then*/
     /* Everyone feels better with a bit of padding */
     background: #00b8ff; /*#6CDAEE;*/
     padding: 1em;
     margin-bottom: 1em;
+    box-shadow: 0px 7px 6px rgba(0,0,0,0.19); /* ombreggiatura per dare effetto rilievo */
 }
 header {
     text-align: center;

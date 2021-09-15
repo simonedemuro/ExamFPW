@@ -54,6 +54,11 @@ public class AdminAddSlot extends HttpServlet {
                 Integer.parseInt(request.getParameter("Naccomodation"))
             );
             
+            /* Attenzione a chi cerca di generare posti malevolmente */
+            if (reservation.getNumPlaces() < 0) {
+                throw new Exception("Non è possibile inserire un numero negativo di posti");
+            }
+            
             /* Effettuo l'inserimento sul db e controllo l'esito */
             CommonResponse res = (BookingRepo.getInstance()).addSlot(reservation); 
             if(!res.result){

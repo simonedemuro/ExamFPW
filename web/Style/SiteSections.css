@@ -9,15 +9,18 @@ and open the template in the editor.
 */
 .card-registration,
 .book-slot-section,
-.show-reservations-section {
+.show-reservations-section,
+.handle-user-section {
     /* centered registration form */
     display: flex;
     justify-content: center;
 }
-.show-reservations-section {
+.show-reservations-section,
+.handle-user-section {
     flex-direction: column;
 }
-.show-reservations-section > h2{
+.show-reservations-section > h2,
+.handle-user-section > h2 {
     text-align: center;
 }
 .card-registration > div,
@@ -116,6 +119,22 @@ section.pers-sec .pers-sec-lvl1-col {
 }
 #reservation-tbl th {
     min-width: 100px;
+}
+#user-tbl {
+    width: 100%;
+}
+.btn-sort {
+    margin: 0 0 0 6px;
+    border-radius: 0;
+    background-color: rgba(16, 231, 208, 0.5);
+    border: none;
+    padding: 2% 5%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19);
+    color: #00b8ff;
+}
+/* quando ci passi sopra diventa piu brillante per far capire di cliccare */
+.btn-sort:hover {
+    background-color: rgba(16, 231, 208, 1);
 }
 /* Schermi larghi */
 @media screen and (max-width: 1200px){

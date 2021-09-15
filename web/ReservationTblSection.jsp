@@ -18,15 +18,15 @@
             </tr>
             <c:forEach var="tblItem" items="${reservationTable}">
                 <tr>
-                    <th class="ThUs"> ${tblItem.getUsername()} </th>
-                    <th class="ThDt"> ${tblItem.getReservationDate()} </th>
-                    <th class="ThPd"> ${tblItem.getReservationPeriod()} </th>
-                    <th class="ThNs"> ${tblItem.getNumReservedSlot()} </th>
+                    <td class="ThUs"> ${tblItem.getUsername()} </td>
+                    <td class="ThDt"> ${tblItem.getReservationDate()} </td>
+                    <td class="ThPd"> ${tblItem.getReservationPeriod()} </td>
+                    <td class="ThNs"> ${tblItem.getNumReservedSlot()} </td>
                     <!-- genero id univoci per aiutarmi a leggere il form dopo in js -->
-                    <th> <input id="ThPc${tblItem.getReservationId()}" type="text" value=""> </th>
-                    <th> <input id="ThDc${tblItem.getReservationId()}" type="text" value=""> </th>
+                    <td> <input id="ThPc${tblItem.getReservationId()}" type="text" value=""> </td>
+                    <td> <input id="ThDc${tblItem.getReservationId()}" type="text" value=""> </td>
                     <!-- uso l'id perche passare gli altri campi dal front end non sarebbe per nulla sicuro, gia in questo caso dovrei controllare che l'id metchi la ownership dello user...  -->
-                    <th> <input id="submit${tblItem.getReservationId()}" type="submit" class="btn-process-reservation" value="Fattura" onclick="processReservation(${tblItem.getReservationId()})"> </th>
+                    <td> <input id="submit${tblItem.getReservationId()}" type="submit" class="btn-process-reservation" value="Fattura" onclick="processReservation(${tblItem.getReservationId()})"> </td>
                 </tr>
             </c:forEach>
         </table>

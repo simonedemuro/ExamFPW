@@ -15,8 +15,9 @@
 
 <!-- Pulsanti utente amministratore -->
 <c:if test="${not empty user && userRole == 'admin'}">
-    <a href="AdminDashboard.jsp" class="btn-nav"> Gestione slot</a>
-    <a href="AdminReservedSlot.jsp" class="btn-nav"> Gestione prenotazioni</a>
+    <a href="AdminDashboard.jsp" class="btn-nav"> slot</a>
+    <a href="AdminReservedSlot.jsp" class="btn-nav"> prenotazioni</a>
+    <a href="AdminHandleUsers.jsp" class="btn-nav"> utenti </a>
 </c:if>
 
 <!-- Pulsanti Utente semplice -->

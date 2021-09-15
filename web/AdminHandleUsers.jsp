@@ -29,7 +29,7 @@ Author     : fpw
     <script src="Js/Registration.js"></script>
     <script src="Js/Login.js"></script>
     <script src="Js/SitePopups.js"></script>
-    <script src="Js/AdminReservations.js"></script>
+    <script src="Js/AdminHandleUser.js"></script>
 </head>
 <body>
 <div class="site">
@@ -61,27 +61,35 @@ Author     : fpw
     </c:if>
 
     <c:if test="${not empty userRole && userRole.equals(\"admin\")}">
-        <section class="show-reservations-section">
-            <h2> Gestisci lo stato dee prenotazioni da qua </h2>
-            <div class="reservation-tbl-container">
-                <table id="reservation-tbl">
+        <section class="handle-user-section">
+            <h2> Gestione utenti </h2>
+            <div class="user-tbl-container">
+                <table id="user-tbl">
                     <tr>
-                        <th> nome utente </th>
-                        <th> data prenotazione </th>
-                        <th> periodo prenotazione </th>
-                        <th> numero di posti </th>
-                        <th> prezzo totale </th>
-                        <th> descrizione </th>
+                        <th> username </th>
+                        <th> ruolo </th>
+                        <th> nome </th>
+                        <th> cognome <button id="surname-sort" class="btn-sort">none</button> </th>
+                        <th> data di nascita </th>
+                        <th> codice Fiscale </th>
+                        <th> email </th>
+                        <th> cellulare </th>
+                        <th> fattura opt-in </th>
+                        <th> totale posti prenotati <button id="num-reserv-sort" class="btn-sort">none</button> </th>
                         <th>  </th>
                     </tr>
                     <tr>
-                        <th> Nome </th>
-                        <th> 2021-10-10 </th>
-                        <th> dal 2021 al 2025 PM </th>
-                        <th> <input type="text"> </th>
-                        <th> <input type="text" value="55€"> </th>
-                        <th> <input type="text"> </th>
-                        <th> <input type="submit" class="btn-process-reservation" value="Fattura"> </th>
+                        <td> ... </td>
+                        <td> ... </td>
+                        <td> ... </td>
+                        <td> ... </td>
+                        <td> ... </td>
+                        <td> ... </td>
+                        <td> ... </td>
+                        <td> ... </td>
+                        <td> ... </td>
+                        <td> ....</td>
+                        <td>  </td>
                     </tr>
                 </table>
             </div>
