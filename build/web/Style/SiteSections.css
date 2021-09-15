@@ -8,10 +8,17 @@ and open the template in the editor.
     Author     : fpw
 */
 .card-registration,
-.book-slot-section {
+.book-slot-section,
+.show-reservations-section {
     /* centered registration form */
     display: flex;
     justify-content: center;
+}
+.show-reservations-section {
+    flex-direction: column;
+}
+.show-reservations-section > h2{
+    text-align: center;
 }
 .card-registration > div,
 .book-slot-section > div {
@@ -103,6 +110,12 @@ section.pers-sec .pers-sec-lvl1-col {
 }
 #add-slot-btn {
     flex: 1;
+}
+.reservation-tbl-container {
+    overflow-x:auto;
+}
+#reservation-tbl th {
+    min-width: 100px;
 }
 /* Schermi larghi */
 @media screen and (max-width: 1200px){
