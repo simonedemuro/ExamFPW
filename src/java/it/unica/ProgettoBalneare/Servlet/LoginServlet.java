@@ -56,6 +56,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", dbUser.getUsername());
                 session.setAttribute("userRole", dbUser.isIsAdmin()?"admin":"simple");
                 session.setAttribute("userId", dbUser.getId());
+                session.setAttribute("userInvoiceOptIn", dbUser.isInvoiceOptIn());
                 session.setMaxInactiveInterval(1800); // timeout scadenza sessione 30 minuti
                 response.getWriter().write("Login effettuato correttamente");
                 //response.sendRedirect("index.jsp");

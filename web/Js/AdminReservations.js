@@ -7,39 +7,31 @@ $(function() {
             $('nav').after(htmlOfTheTable);
         });
     })();
-
-    /* Invia prenotazione  */
-    $('#btnBook').click(function (e){
-        e.preventDefault();
-
-        /* controllo che ci siano i campi che potrebbero essere stati diemnticati */
-        let validFrom = formData.filter(x => x.name === "Ffrom")[0].value !== "" &&
-            formData.filter(x => x.name === "...")[0].value !== "" &&
-            formData.filter(x => x.name === "...")[0].value !== "";
-        if(!validFrom) {
-            showMessage("Errore: compila tutti i campi obbligatori e riprova", 3000, false);
-            return;
-        }
-
-        /* Chiedo al back di processare la richiesta */
-        $.post("", formData, function(data) {
-            showMessage(data, 3000, false);
-
-            /* ricarico la tabella per vedere le modifiche */
-            $.post("...", {}, function (htmlOfTheCalendar) {
-
-            });
-        })
-            .fail(function(response) {
-                showMessage(response.responseText, 3000, false);
-            });
-    });
-
 });
 
-function some(html) {
-    /* rimuovo il vecchio calendario se presente */
-    $('.class').remove();
-    /* attacco il nuovo */
-    $('.selaftertheeltn').after(html);
+function processReservation(idReservation) {
+    /* genero gli id in base all'id della prenotazione e prendo i dati*/
+    let price = $('#ThPc'+idReservation).val();
+    let description = $('#ThDc'+idReservation).val();
+    console.log({"id":idReservation, "price:":price, "description":description});
+
+    /* controllo che non ci siano lettere nel prezzo (se la lunghezza della regex tutto tranne numeri non è undefined)*/
+    if (price.match(/[^0-9]/g)?.length !== undefined) {
+        showMessage("Errore: non si possono inserire caratteri nel prezzo",3000, false);
+        return;
+    }
+
+    /* ne parlo con la servlet */
+    $.post("processReservation", {"Id":idReservation, "price":price, "description": description}, function(data) {
+        showMessage(data, 3000, false);
+
+        /* ricarico la tabella per vedere le modifiche */
+        $.post("getReservationTable", {}, function (htmlOfTheTable) {
+            $('.show-reservations-section').remove();
+            $('nav').after(htmlOfTheTable);
+        });
+    })
+    .fail(function(response) {
+            showMessage(response.responseText, 3000, false);
+    });
 }

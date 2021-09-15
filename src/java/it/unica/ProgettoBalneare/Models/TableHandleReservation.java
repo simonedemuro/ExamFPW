@@ -17,6 +17,7 @@ public class TableHandleReservation {
     private LocalDate reservationDate;
     private String reservationPeriod;
     private int numReservedSlot;
+    private long reservationId;
 
     public TableHandleReservation() {
     }
@@ -26,6 +27,14 @@ public class TableHandleReservation {
         this.reservationDate = reservationDate;
         this.reservationPeriod = reservationPeriod;
         this.numReservedSlot = numReservedSlot;
+    }
+    
+    public long getReservationId() {
+        return reservationId;
+    }
+
+    public void setReservationId(long reservationId) {
+        this.reservationId = reservationId;
     }
 
     public String getUsername() {

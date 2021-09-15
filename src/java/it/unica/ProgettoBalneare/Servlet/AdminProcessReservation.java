@@ -6,7 +6,6 @@
 package it.unica.ProgettoBalneare.Servlet;
 
 import it.unica.ProgettoBalneare.Models.CommonResponse;
-import it.unica.ProgettoBalneare.Models.SlotViewModel;
 import it.unica.ProgettoBalneare.Models.TableHandleReservation;
 import it.unica.ProgettoBalneare.Repos.BookingRepo;
 import it.unica.ProgettoBalneare.Repos.InvoiceRepo;
@@ -25,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author fpw
  */
-@WebServlet(name = "AdminGetReservationTable", urlPatterns = {"/getReservationTable"})
-public class AdminGetReservationTable extends HttpServlet {
+@WebServlet(name = "AdminProcessReservation", urlPatterns = {"/processReservation"})
+public class AdminProcessReservation extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,7 +39,8 @@ public class AdminGetReservationTable extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        
+        try {
             /* prendo dati dall'utente e verifico che sia loggato e che sia admin */
             HttpSession session = request.getSession(false);
             String username = session != null ? (String) session.getAttribute("user") : null;
@@ -48,27 +48,23 @@ public class AdminGetReservationTable extends HttpServlet {
             long userId = session != null ? (long)session.getAttribute("userId") : -1;
             if (username == null || userRole == null || userId == -1) {
                 throw new Exception("Errore: si sta provando ad entrare nella sezione personale senza essere loggati o senza essere autorizzati");
-            }           
+            }
             
-            /* processo la richiesta lato db */
-            CommonResponse res = InvoiceRepo.getInstance().getProcessInvoiceTable();
-                    
-            if(res.result) {
-               ArrayList<TableHandleReservation> tbl = (ArrayList<TableHandleReservation>) res.payload;
-               request.setAttribute("reservationTable", tbl);
+            /* prendo e controllo l'input passatomi dal form */
+            long formInvoiceId = Long.parseLong(request.getParameter("Id"));
+            int price = Integer.parseInt(request.getParameter("price"));
+            String desctioption = request.getParameter("description");
 
-                request.getRequestDispatcher("ReservationTblSection.jsp").forward(request, response);
-            } else {
+            /* processo la richiesta lato db */
+            CommonResponse res = InvoiceRepo.getInstance().processInvoice(formInvoiceId, price, desctioption);
+                    
+            if(!res.result) {
                 throw new Exception(res.message);
             }
-
-
-           
+            
+            response.getWriter().write(res.message);
         } catch (Exception e) {
-            /* forward to error page */
-            request.setAttribute("errorMessage", e.getMessage());
-            request.getRequestDispatcher("ErrorHandle.jsp").forward(request, response);
-            System.out.println(e.getMessage());
+            response.getWriter().write("Errore: " + e.getMessage());
         }
         
     }
