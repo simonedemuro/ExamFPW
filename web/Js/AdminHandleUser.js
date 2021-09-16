@@ -13,33 +13,48 @@ $(function() {
         console.log("order by " + sortBy + " " + sortType);
 
         $.post("getTblUser", {"sortBy": sortBy, "sortType": sortType}, function (htmlOfTheTable) {
-            $('#user-tbl').remove();
-            $('.user-tbl-container').after(htmlOfTheTable);
+            $('.dt-row').remove();
+            $('#user-tbl-header-row').after(htmlOfTheTable);
         });
     })();
 
     /* si tratta di due pulsanti con la stessa classe che voglio gestire allo stesso modo
     * facendo cambiare il loro testo in none -> asc -> desc e poi da capo */
     $('.btn-sort').click(function(e){
-        /* seleziono elemento cliccato */
-        let clickerId = e.target.id;                // salvo l'id dell'elemento cliccato per poi prendere l'elemento
-        let innerTxt = $('#'+clickerId).html();     // prendo il testo nel pulsante cliccato
-
-        /* deseleziono tutti gli altri */
-        $('.btn-sort').html("none");                // l'altro pulsante deve tornare ad essere none
-        $('.btn-sort').removeClass("active");
-
-        /* cambio stato */
-        if(innerTxt === "none"){                    // se è none cambio classe e metto come teso "asc" per ascending
-            $('#'+clickerId).html("asc");
-            $('#'+clickerId).addClass("active");
-        } else if (innerTxt === "asc") {            // se è asc metto desc
-            $('#'+clickerId).addClass("active");
-            $('#'+clickerId).html("desc");
-        } else if (innerTxt === "desc") {           // se è desc torno in none e tolgo la classe active
-            $('#'+clickerId).html("none");
-            $('#'+clickerId).removeClass("active");
-        }
+        handleSortClick(e);
     });
 
 });
+
+function handleSortClick(e) {
+    /* seleziono elemento cliccato */
+    let clickerId = e.target.id;                // salvo l'id dell'elemento cliccato per poi prendere l'elemento
+    let innerTxt = $('#'+clickerId).html();     // prendo il testo nel pulsante cliccato
+
+    /* deseleziono tutti gli altri */
+    $('.btn-sort').html("none");                // l'altro pulsante deve tornare ad essere none
+    $('.btn-sort').removeClass("active");
+
+    /* cambio stato */
+    if(innerTxt === "none"){                    // se è none cambio classe e metto come teso "asc" per ascending
+        $('#'+clickerId).html("asc");
+        $('#'+clickerId).addClass("active");
+    } else if (innerTxt === "asc") {            // se è asc metto desc
+        $('#'+clickerId).addClass("active");
+        $('#'+clickerId).html("desc");
+    } else if (innerTxt === "desc") {           // se è desc torno in none e tolgo la classe active
+        $('#'+clickerId).html("none");
+        $('#'+clickerId).removeClass("active");
+    }
+
+    /* prendo i parametri e chiamo la servlet */
+    let sortBy = ( () => {if(clickerId==="surname-sort") return "surname"; else if(clickerId==="num-reserv-sort") return "tot_num_res"; else return "";} )();
+    let sortType = ( () => { if($('#'+clickerId).html()==="none") return ""; else return $('#'+clickerId).html(); })();
+    console.log("order by " + sortBy + " " + sortType);
+
+    $.post("getTblUser", {"sortBy": sortBy, "sortType": sortType}, function (htmlOfTheTable) {
+        $('.dt-row').remove();
+        $('#user-tbl-header-row').after(htmlOfTheTable);
+    });
+
+}

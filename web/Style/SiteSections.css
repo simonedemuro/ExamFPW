@@ -122,19 +122,30 @@ section.pers-sec .pers-sec-lvl1-col {
 }
 #user-tbl {
     width: 100%;
+    text-align: center;
 }
 .btn-sort {
     margin: 0 0 0 6px;
     border-radius: 0;
     background-color: rgba(16, 231, 208, 0.5);
     border: none;
-    padding: 2% 5%;
+    width: 36px;
+    height: 17px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19);
     color: #00b8ff;
+}
+.btn-sort.active {
+    background-color: #E693FF;
+    color: white;
 }
 /* quando ci passi sopra diventa piu brillante per far capire di cliccare */
 .btn-sort:hover {
     background-color: rgba(16, 231, 208, 1);
+    color: white;
+    font-weight: bold;
+}
+.btn-sort.active:hover {
+    background-color: #A38DFB;
 }
 /* Schermi larghi */
 @media screen and (max-width: 1200px){

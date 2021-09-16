@@ -22,5 +22,5 @@
             </div>
         </div>
     </form>
-    <p id="msg-signup"> se non hai ancora un account <a href="/Registration.jsp">Registrati</a></p>
+    <p id="msg-signup"> se non hai ancora un account <a href="Registration.jsp">Registrati</a></p>
 </section>
