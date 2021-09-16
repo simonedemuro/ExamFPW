@@ -1,11 +1,21 @@
 /* Document ready attacco gli eventi  */
 $(function() {
-    /* carico qualcosa */
+    /* carico la tabella */
     (function () {
-        // $.post("getReservationTable", {}, function (htmlOfTheTable) {
-        //     $('.show-reservations-section').remove();
-        //     $('nav').after(htmlOfTheTable);
-        // });
+        /* dalla classe .active seleziono l'id dell'elemento attovo, dall'id so il campo da ordinare, per farlo uso le funzioni labda di js */
+        let sortBy =(()=> {if ($('.btn-sort.active').attr('id') === "surname-sort") return "surname";
+                            else if ($('.btn-sort.active').attr('id') === "num-reserv-sort") return "tot_num_res";
+                            else return "" })();
+
+        /* per il tipo di sort è più facile e basta prendere il testo di chi è active o stringa vuota */
+        let sortType = $('.btn-sort.active').html()??"";
+
+        console.log("order by " + sortBy + " " + sortType);
+
+        $.post("getTblUser", {"sortBy": sortBy, "sortType": sortType}, function (htmlOfTheTable) {
+            $('#user-tbl').remove();
+            $('.user-tbl-container').after(htmlOfTheTable);
+        });
     })();
 
     /* si tratta di due pulsanti con la stessa classe che voglio gestire allo stesso modo

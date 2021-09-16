@@ -7,11 +7,13 @@ package it.unica.ProgettoBalneare.Repos;
 import it.unica.ProgettoBalneare.Db.DatabaseManager;
 import it.unica.ProgettoBalneare.Models.CommonResponse;
 import it.unica.ProgettoBalneare.Models.UserModel;
+import it.unica.ProgettoBalneare.Models.UserTableItem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Map;
@@ -164,6 +166,58 @@ public class UserRepo {
             // Lancio la query sul database e rispondo true
             stmt.executeUpdate();
             return new CommonResponse(true,null,null);
+            
+        }catch(SQLException e){
+            Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());
+            return new CommonResponse(false,e.getMessage(),e);
+        } finally {
+            try{ set.close();} catch(Exception e){}
+            try{ stmt.close();} catch(Exception e){}
+            try{ conn.close();} catch(Exception e){}
+        }
+    }
+    
+    public CommonResponse getUsersTable(String sortField, String sortType) {
+        // Connection parameters
+        Connection conn= null;
+        PreparedStatement stmt = null;
+        ResultSet set = null; 
+        
+        try{
+            // Opening Connection
+            conn = DatabaseManager.getInstance().getDbConnection();
+            // Preparo la query i parametri di sort sono trusted e faccio format sereno
+            String query = "select username, role, name, surname, sex, birthday, fiscalnumber, email, phone, invoiceoptin, tot_num_res " +
+                    "from view_user_totslot ";
+            /* se l'ordinamento è stato riempito allora ordino per questa colonna nell'ordine scelto che se dovesse mancare sarebbe asc di default */
+            if(!sortField.equals("")) {
+                query = query + String.format("order by %s %s;", sortField, sortType);
+            }
+
+            stmt = conn.prepareStatement(query);
+            
+            LOG.info("Getting the user table :\n" + stmt.toString());
+
+            set = stmt.executeQuery();
+            ArrayList<UserTableItem> tblUsers = new ArrayList<UserTableItem>();
+            while(set.next()){
+                UserTableItem utente = new UserTableItem();
+                utente.setUsername(set.getString("username"));
+                utente.setRole("role");
+                utente.setName(set.getString("name"));
+                utente.setSurname(set.getString("surname"));
+                utente.setSex(set.getString("sex"));
+                utente.setBirthday(LocalDate.parse(set.getString("birthday")));
+                utente.setFiscalnumber(set.getString("fiscalnumber"));
+                utente.setEmail(set.getString("email"));
+                utente.setPhone(set.getString("phone"));
+                utente.setInvoiceoptin(set.getString("invoiceoptin"));
+                utente.setTot_num_res(set.getInt("tot_num_res"));
+                
+                tblUsers.add(utente);
+                
+            }
+            return new CommonResponse(true,"Ok",tblUsers);
             
         }catch(SQLException e){
             Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());

@@ -64,34 +64,7 @@ Author     : fpw
         <section class="handle-user-section">
             <h2> Gestione utenti </h2>
             <div class="user-tbl-container">
-                <table id="user-tbl">
-                    <tr>
-                        <th> username </th>
-                        <th> ruolo </th>
-                        <th> nome </th>
-                        <th> cognome <button id="surname-sort" class="btn-sort">none</button> </th>
-                        <th> data di nascita </th>
-                        <th> codice Fiscale </th>
-                        <th> email </th>
-                        <th> cellulare </th>
-                        <th> fattura opt-in </th>
-                        <th> totale posti prenotati <button id="num-reserv-sort" class="btn-sort">none</button> </th>
-                        <th>  </th>
-                    </tr>
-                    <tr>
-                        <td> ... </td>
-                        <td> ... </td>
-                        <td> ... </td>
-                        <td> ... </td>
-                        <td> ... </td>
-                        <td> ... </td>
-                        <td> ... </td>
-                        <td> ... </td>
-                        <td> ... </td>
-                        <td> ....</td>
-                        <td>  </td>
-                    </tr>
-                </table>
+
             </div>
         </section>
     </c:if>
