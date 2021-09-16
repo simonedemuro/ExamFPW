@@ -56,7 +56,10 @@ public class BookSlot extends HttpServlet {
             String toAmPm = request.getParameter("FtoSlot").equals("Mattina")?"AM":"PM";
             int numReservedSlots = Integer.parseInt(request.getParameter("Fnumplaces"));
             
-
+            if (numReservedSlots < 0 ){
+                throw new Exception("Non si può prenotare un numero negativo di slot");
+            }
+            
             CommonResponse res = BookingRepo.getInstance().bookSlots(fromDate, fromAmPm, toDate, toAmPm, numReservedSlots, userId);
             
             response.getWriter().write(res.message);

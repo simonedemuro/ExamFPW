@@ -30,7 +30,7 @@ $(function() {
         /* Aggiungo slot */
         $.post("addSlot", formData, function (data) {
             /* mostro un messaggio 3 secondi e non faccio refresh */
-            showMessage(data, 1000, true);
+            showMessage(data, 1000, false);
         });
     });
 
@@ -42,11 +42,13 @@ $(function() {
 function prevMonth () {
     $.post("getSlotCalendar", {"navigationAction" : "previousMonth"}, function (htmlOfTheCalendar) {
         attachCalendar(htmlOfTheCalendar);
+        showMessage("Calendario caricato", 1000, false);
     });
 }
 function nextMonth() {
     $.post("getSlotCalendar", {"navigationAction" : "nextMonth"}, function (htmlOfTheCalendar) {
         attachCalendar(htmlOfTheCalendar);
+        showMessage("Calendario caricato", 1000, false);
     });
 }
 /* gestisce la sostituzione del calendario vecchio con il nuovo */
@@ -55,5 +57,4 @@ function attachCalendar(htmlOfTheCalendar) {
     $('.calendar-section').remove();
     /* attacco il nuovo */
     $('section.admin-add-slot').after(htmlOfTheCalendar);
-    showMessage("Calendario caricato", 1000, false);
 }

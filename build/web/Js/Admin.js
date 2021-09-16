@@ -3,8 +3,7 @@ $(function() {
     *  e interagisco con la DOM a mano aggiungendo il calendario */
     (function () {
         $.post("getSlotCalendar", {"sender":"AdminDashboard"}, function (htmlOfTheCalendar) {
-            /* metto il calendario ma non mostro un messaggio che lo dice in forma di popup */
-            attachCalendar(htmlOfTheCalendar, false);
+            attachCalendar(htmlOfTheCalendar);
         });
     })();
 
@@ -31,7 +30,7 @@ $(function() {
         /* Aggiungo slot */
         $.post("addSlot", formData, function (data) {
             /* mostro un messaggio 3 secondi e non faccio refresh */
-            showMessage(data, 1000, true);
+            showMessage(data, 1000, false);
         });
     });
 
@@ -42,22 +41,20 @@ $(function() {
 *  per questo motivo l'evento click è direttamente nell'heml dei pulsanti */
 function prevMonth () {
     $.post("getSlotCalendar", {"navigationAction" : "previousMonth"}, function (htmlOfTheCalendar) {
-        attachCalendar(htmlOfTheCalendar, true);
+        attachCalendar(htmlOfTheCalendar);
+        showMessage("Calendario caricato", 1000, false);
     });
 }
 function nextMonth() {
     $.post("getSlotCalendar", {"navigationAction" : "nextMonth"}, function (htmlOfTheCalendar) {
-        attachCalendar(htmlOfTheCalendar, true);
+        attachCalendar(htmlOfTheCalendar);
+        showMessage("Calendario caricato", 1000, false);
     });
 }
 /* gestisce la sostituzione del calendario vecchio con il nuovo */
-function attachCalendar(htmlOfTheCalendar, displayMessage) {
+function attachCalendar(htmlOfTheCalendar) {
     /* rimuovo il vecchio calendario se presente */
     $('.calendar-section').remove();
     /* attacco il nuovo */
     $('section.admin-add-slot').after(htmlOfTheCalendar);
-    /* mostro messaggio se desiderato */
-    if(displayMessage){
-        showMessage("Calendario caricato", 1000, false);
-    }
 }
