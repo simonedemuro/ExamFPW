@@ -138,6 +138,12 @@ public class BookingRepo {
                 iterDate = iterDate.withDayOfMonth(currDay+1);
                 timeAmPm = timeAmPm.equals("AM")?"PM":"AM"; // inverto AM-PM e viceversa
             }
+            /* tratto separatamente l'ultimo del mese */
+            SlotViewModel s = new SlotViewModel(iterDate.getDayOfMonth(), "AM", 0, 0){};
+            fullSlots.add(s);
+            s = new SlotViewModel(iterDate.getDayOfMonth(), "PM", 0, 0){};
+            fullSlots.add(s);
+            
             /* Ora faccio una "join" per mettere i valori sugli slot presenti */
             iterDate = monthYear;
             while(!querySlots.isEmpty()) {
