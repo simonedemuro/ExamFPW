@@ -12,9 +12,6 @@
     <link href="Style/SiteGeneral.css" rel="stylesheet">
     <link href="Style/SiteSections.css" rel="stylesheet">
     <!-- Online libs and styles from Google CDNs -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Adding the front end logics -->
     <script src="Js/Registration.js"></script>

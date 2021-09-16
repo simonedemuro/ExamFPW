@@ -21,9 +21,6 @@ Author     : fpw
     <link href="Style/SiteSections.css" rel="stylesheet">
     <link href="Style/ReservationSection.css" rel="stylesheet">
     <!-- Online libs and styles from Google CDNs -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Adding the front end logics -->
     <script src="Js/Registration.js"></script>
@@ -73,15 +70,6 @@ Author     : fpw
                         <th> prezzo totale </th>
                         <th> descrizione </th>
                         <th>  </th>
-                    </tr>
-                    <tr>
-                        <th> Nome </th>
-                        <th> 2021-10-10 </th>
-                        <th> dal 2021 al 2025 PM </th>
-                        <th> <input type="text"> </th>
-                        <th> <input type="text" value="55€"> </th>
-                        <th> <input type="text"> </th>
-                        <th> <input type="submit" class="btn-process-reservation" value="Fattura"> </th>
                     </tr>
                 </table>
             </div>

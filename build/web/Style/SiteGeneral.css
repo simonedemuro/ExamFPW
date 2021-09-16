@@ -7,11 +7,22 @@ and open the template in the editor.
     Created on : Sep 3, 2021, 3:45:47 PM
     Author     : fpw
 */
+
+/* aggiungo font Roboto caricato in locale */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+    url('../fonts/roboto-v27-latin-regular.woff2') format('woff2'),
+    url('../fonts/roboto-v27-latin-regular.woff') format('woff');
+}
+
 * {
     box-sizing: border-box;
 }
 ::placeholder{
-    color: rgba(255, 255, 255,0.5);
+    color: rgba(255, 255, 255,0.7);
     font-weight:lighter;
     font-size: 1.2em;
 }
@@ -20,7 +31,6 @@ body {
     /* Impostazione font per intero sito */
     color: white;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.2em;
 }
 /* Todo: su dispositivi piccoli metti width 100% */
 input[type=submit], .btn-nav, .a-to-btn {
