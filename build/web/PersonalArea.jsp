@@ -11,8 +11,7 @@
     <!-- Styling the site-->
     <link href="Style/SiteGeneral.css" rel="stylesheet">
     <link href="Style/SiteSections.css" rel="stylesheet">
-    <!-- Online libs and styles from Google CDNs -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="Js/jquery3.6.0.min.js"></script>
     <!-- Adding the front end logics -->
     <script src="Js/Registration.js"></script>
     <script src="Js/Login.js"></script>

@@ -13,12 +13,7 @@
     <!--    Styling the site-->
     <link rel="stylesheet" href="Style/SiteGeneral.css">
     <link rel="stylesheet" href="Style/SiteSections.css">
-    <!-- Online libs and styles from Google CDNs -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!--    Adding the front end logics -->
+    <script src="Js/jquery3.6.0.min.js"></script>    <!--    Adding the front end logics -->
     <script src="Js/Registration.js"></script>
     <script src="Js/Login.js"></script>
     <script src="Js/SitePopups.js"></script>

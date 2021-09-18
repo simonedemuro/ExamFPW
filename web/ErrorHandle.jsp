@@ -21,7 +21,7 @@
         <link href="https://fonts.googleapis.com" rel="preconnect">
         <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="Js/jquery3.6.0.min.js"></script>
         <!-- Adding the front end logics -->
         <script src="Js/Registration.js"></script>
         <script src="Js/Login.js"></script>
