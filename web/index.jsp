@@ -54,7 +54,8 @@ Author     : fpw
 
     <!-- Permetto a tutti gli utenti registrati e visitatori di vedere gli slot disponibili  -->
     <!-- La sezione anche se invisibile mi serve per usare il js di BookSlot che fa attach sull'after di questa section  -->
-    <section class="book-slot-section hidden">
+    <section class="book-slot-section">
+        <h2> Visualizza i posti disponibili </h2>
     </section>
 
     <main>

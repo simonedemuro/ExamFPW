@@ -124,6 +124,15 @@ section.pers-sec .pers-sec-lvl1-col {
     width: 100%;
     text-align: center;
 }
+.invoice-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.invoice-section .invoice-cont-width {
+    width: 80%;
+}
 .btn-sort {
     margin: 0 0 0 6px;
     border-radius: 0;
@@ -133,6 +142,13 @@ section.pers-sec .pers-sec-lvl1-col {
     height: 17px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19);
     color: #00b8ff;
+}
+#invoice-tbl {
+    padding: 3% 0 0 0;
+}
+.invoice-container {
+    /* tabella responsive */
+    overflow: auto;
 }
 .btn-sort.active {
     background-color: #E693FF;

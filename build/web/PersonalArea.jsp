@@ -51,12 +51,14 @@
     <input id="sex" type="hidden" value="${dbUser.getSex()}"/>
     <input id="invoice" type="hidden" value="${dbUser.isInvoiceOptIn()}"/>
     <section class="pers-sec">
-        <div>
-            <p> Ciao ${user}, qua puoi modificare le tue informazioni personali: </p>
-            <p> Cliccando sui campi che vuoi modificare compariranno i valori precedentemente impostati per aiutarti (tranne per la password 😜)</p>
-        </div>
         <div class="pers-sec-lvl1-col">
             <div class="personal-info-form">
+                <div>
+                    <h2> Sezione personale </h2>
+                    <p> Ciao ${user}, qua puoi modificare le tue informazioni personali: </p>
+                    <p> Cliccando sui campi che vuoi modificare compariranno i valori precedentemente impostati per aiutarti (tranne per la password 😜)</p>
+                </div>
+
                 <form id="registration-data" action="">
                 <label for="Fuser">Username: </label>
                 <input class="magic-complete" type="text" id="Fuser" name="Fuser" placeholder="${dbUser.getUsername()}" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required> <!-- readonly e remove serve a impedire a mozzilla di cashare le informazioni con prepotenza -->

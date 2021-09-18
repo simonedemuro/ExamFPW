@@ -7,6 +7,7 @@ package it.unica.ProgettoBalneare.Repos;
 
 import it.unica.ProgettoBalneare.Db.DatabaseManager;
 import it.unica.ProgettoBalneare.Models.CommonResponse;
+import it.unica.ProgettoBalneare.Models.InvoiceTableItem;
 import it.unica.ProgettoBalneare.Models.Slot;
 import it.unica.ProgettoBalneare.Models.SlotViewModel;
 import it.unica.ProgettoBalneare.Models.TableHandleReservation;
@@ -84,6 +85,54 @@ public class InvoiceRepo {
             try{ conn.close();} catch(Exception e){}
         }
     }
+    
+    public CommonResponse getInvoicesByUser(long userId){   
+        // Connection parameters
+        Connection conn= null;
+        PreparedStatement stmt = null;
+        ResultSet set = null; 
+        
+        try{
+            // Opening Connection
+            conn = DatabaseManager.getInstance().getDbConnection();
+            // mi prendo i campi necessari a popolare la tabella mandando in join le prenotazioni con gli utenti
+            String query = "select i.\"Id\",  CONCAT(u.name, ' ', u.surname) as ownerFullName, i.price, i.description, i.reservation_date, i.reservation_period, i.num_reserved_slot from invoice as i " +
+                            "join \"user\" u on i.\"Id_user\" = u.\"Id\" " +
+                            "where u.\"Id\" = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setLong(1, userId);
+            
+            LOG.info("getting invoices for the user to see:\n" + stmt.toString());
+        
+            /* fetching dei risultati dalla query nel mio modello */
+            set = stmt.executeQuery();
+            ArrayList<InvoiceTableItem> dbTbl = new ArrayList<InvoiceTableItem>();
+            while(set.next()){
+                /* creo lo slot e lo metto nel dizionario */
+                InvoiceTableItem tblItem = new InvoiceTableItem();
+                tblItem.setId(set.getLong("Id"));
+                tblItem.setOnwerFulllName(set.getString("ownerfullname"));
+                tblItem.setPrice(set.getInt("price"));
+                tblItem.setDescription(set.getString("description"));
+                tblItem.setReserveationDate(LocalDate.parse(set.getString("reservation_date")));
+                tblItem.setReservationPeriod(set.getString("reservation_period"));
+                tblItem.setNumReserverSlot(set.getInt("num_reserved_slot"));
+               
+                dbTbl.add(tblItem);
+            }
+            
+            /* restituisco il risultato alla servlet */
+            return new CommonResponse(true, "Ok", dbTbl);
+        }catch(SQLException e){
+            Logger.getLogger(UserRepo.class.getName()).severe(e.getMessage());
+            return new CommonResponse(false,e.getMessage(),e);
+        } finally {
+            try{ set.close();} catch(Exception e){}
+            try{ stmt.close();} catch(Exception e){}
+            try{ conn.close();} catch(Exception e){}
+        }
+    }
+    
     
      public CommonResponse processInvoice(long reservationId, int price, String description){   
         // Connection parameters

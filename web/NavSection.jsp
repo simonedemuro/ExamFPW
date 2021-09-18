@@ -23,7 +23,5 @@
 <!-- Pulsanti Utente semplice -->
 <c:if test="${not empty user && userRole == 'simple'}">
     <a href="BookSlot.jsp" class="btn-nav"> Prenota slot</a>
-</c:if>
-<c:if test="${not empty user && userRole == 'simple'}">
-    <a class="btn-nav"> Gestione fatture</a>
+    <a href="HandleInvoices.jsp" class="btn-nav"> Gestione fatture</a>
 </c:if>
