@@ -7,6 +7,9 @@ and open the template in the editor.
     Created on : Sep 3, 2021, 3:46:14 PM
     Author     : fpw
 */
+.book-slot-section.hidden {
+    display: none;
+}
 .card-registration,
 .book-slot-section,
 .show-reservations-section,

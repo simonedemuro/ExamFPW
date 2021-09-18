@@ -41,12 +41,9 @@ public class AdminGetSlotCalendar extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         try {
-            /* prendo dati dall'utente e valido */
-            HttpSession session = request.getSession(false);
-            String username = session != null ? (String) session.getAttribute("user") : null;
-            if (username == null) {
-                throw new Exception("Errore: si sta provando ad entrare nella sezione personale senza essere loggati, probabilmente la sessione è scaduta");
-            }
+            /* In questo caso non controllo che l'utente sia registrato perche boglio far vedere il calendario a tutti
+            gli utenti e anche visitatori, tuttavia una sessione mi serve per tenere conto del mese corrente */
+            HttpSession session = request.getSession(true);
             
             /* data di visualizzazione presa dalla sessione, se assente mese corrente */
             String strDate =(String) session.getAttribute("currentDate");

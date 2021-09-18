@@ -17,12 +17,13 @@ Author     : fpw
     <!-- Styling the site-->
     <link href="Style/SiteGeneral.css" rel="stylesheet">
     <link href="Style/SiteSections.css" rel="stylesheet">
-    <!-- Online libs and styles from Google CDNs -->
+    <link href="Style/ReservationSection.css" rel="stylesheet">
     <script src="Js/jquery3.6.0.min.js"></script>
     <!-- Adding the front end logics -->
     <script src="Js/Registration.js"></script>
     <script src="Js/Login.js"></script>
     <script src="Js/SitePopups.js"></script>
+    <script src="Js/BookSlot.js"></script>
 </head>
 <body>
 <div class="site">
@@ -52,7 +53,9 @@ Author     : fpw
     </c:if>
 
     <!-- Permetto a tutti gli utenti registrati e visitatori di vedere gli slot disponibili  -->
-    
+    <!-- La sezione anche se invisibile mi serve per usare il js di BookSlot che fa attach sull'after di questa section  -->
+    <section class="book-slot-section hidden">
+    </section>
 
     <main>
     </main>
