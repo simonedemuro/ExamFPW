@@ -1,6 +1,6 @@
 var showMessage = function (data, time, reload) {
     if (!data.toLowerCase().includes("error")) {
-        $("#msgBar").text(data);
+        $("#msgBar").text("✅️   " + data);
         // Metto il messaggio e la classe info per farlo apparire
         $("#msgBar").addClass("msg-info");
 
@@ -15,7 +15,7 @@ var showMessage = function (data, time, reload) {
     }
     else {
         // Messaggio di errore
-        $("#msgBar").text(data);
+        $("#msgBar").text("❌   " +data);
         // Metto il messaggio e la classe info per farlo apparire
         $("#msgBar").addClass("msg-error");
 

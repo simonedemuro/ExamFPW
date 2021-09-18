@@ -32,7 +32,9 @@ body {
     color: white;
     font-family: 'Roboto', sans-serif;
 }
-/* Todo: su dispositivi piccoli metti width 100% */
+h2 {
+    font-size: 1.3em;
+}
 input[type=submit], .btn-nav, .a-to-btn {
     border: none;
     color: white;

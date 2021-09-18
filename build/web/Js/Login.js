@@ -27,10 +27,10 @@ $(function() {
             url: "logout",
             data: "",
             success: function(data){
-                /* mostra messaggio di errore se compare la sottostringa errore
-                *  nel messaggio che deve essere mostrato altrimenti successo
-                *  poi refresha la pagina. */
-                showMessage(data,1000, true);
+                /* in caso di log out torno alla homepage per evitare che ri facendo il log in l'utente si trovi
+                * in sezioni che non potrebbe o vorrebbe vedere */
+                location.href = "index.jsp";
+
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 /* Messaggio di errore per 3 secondi senza refresh della pagina */
