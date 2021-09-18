@@ -4,14 +4,7 @@ Lo scopo del progettto è ...
 
 ***
 
-Lista delle attività e come si castigano
 
-- [x] Creazione progetto vuoto
-- [x] Sincronizzazione GitHub
-- [ ] Ambiente di sviluppo **macchina fisica** linux + Jb Ij Idea
-- [ ] Creazione Dummy Servlet
-- [ ] Creazione Dummy Database
-- [ ] Funzionamento Dummy Database su **macchina fisica**
 
 ## Requisiti:
 
