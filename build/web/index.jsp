@@ -56,12 +56,14 @@ Author     : fpw
     <!-- La sezione anche se invisibile mi serve per usare il js di BookSlot che fa attach sull'after di questa section  -->
     <section class="book-slot-section">
         <h2> Visualizza i posti disponibili </h2>
+        <p> In questo sito puoi visualizzare l'elenco di slot disponibili per la spiaggia di villasimius.  </p>
+        <p> Registrandosi è possibile prenotare i posti e ricevere le fatture.  </p>
     </section>
 
     <main>
     </main>
     <footer>
-
+        <jsp:include page="footerSection.jsp"/>
     </footer>
 </div>
 <div id="msgBar"> {{MESSAGGIO}}</div>

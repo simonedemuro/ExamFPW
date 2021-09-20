@@ -5,7 +5,7 @@ $(function() {
         /* dalla classe .active seleziono l'id dell'elemento attovo, dall'id so il campo da ordinare, per farlo uso le funzioni labda di js */
         let sortBy =(()=> {if ($('.btn-sort.active').attr('id') === "surname-sort") return "surname";
                             else if ($('.btn-sort.active').attr('id') === "num-reserv-sort") return "tot_num_res";
-                            else return "" })();
+                            else return ""; })();
 
         /* per il tipo di sort è più facile e basta prendere il testo di chi è active o stringa vuota */
         let sortType = $('.btn-sort.active').html()??"";

@@ -192,6 +192,23 @@ header p.sub {
 header .title-container {
     display: inline-block;
 }
+.footer-center-rows {
+    /* centro le info presenti nel footer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 1%;
+
+}
+.footer-center-rows .img-logo {
+    /* setto la dimensione del logo in base all altezza della pagina e inverto il colore perche nero non ci sta bene */
+    height: 15vh;
+    filter: invert(100%);
+}
+.footer-center-rows .img-logo + .stacked-infos {
+    margin-left: 2%;
+}
 /* Schermi larghi */
 @media screen and (max-width: 1200px){
     .site {

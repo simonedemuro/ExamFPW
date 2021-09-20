@@ -93,7 +93,7 @@ Author     : fpw
         </section>
     </c:if>
     <footer>
-
+        <jsp:include page="footerSection.jsp"/>
     </footer>
 </div>
 <div id="msgBar"> {{MESSAGGIO}}</div>

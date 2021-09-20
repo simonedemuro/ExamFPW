@@ -37,7 +37,9 @@ $(function() {
 
                 // Rimuovo dopo 3 secondi la notifica
                 setTimeout(function myFunction() {
+                    /* messaggio di susccesso e mando alla homepage */
                     $("#msgBar").removeClass("msg-info");
+                    location.href = "index.jsp";
                 }, 3000);
             }
             else {

@@ -109,7 +109,7 @@
     <main>
     </main>
     <footer>
-        footer
+        <jsp:include page="footerSection.jsp"/>
     </footer>
 </div>
 <div id="msgBar"> {{MESSAGGIO}}</div>

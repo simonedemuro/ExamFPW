@@ -44,7 +44,9 @@
             ${user} risulti correntemente loggato, per registrare un nuovo account effettua il log out.
         </c:if>
         </main>
-        <footer>Footer</footer>
+        <footer>
+            <jsp:include page="footerSection.jsp"/>
+        </footer>
     </div>
     <div id="msgBar"> {{MESSAGGIO}}</div>
 </body>

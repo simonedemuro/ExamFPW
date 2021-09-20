@@ -11,5 +11,12 @@ $(function() {
         $('.invoices-row').remove();
         /* attacco le nuove */
         $('.invoice-tbl-header-row').after(htmlTblInvoice);
+        /* faccio vedere la tabella */
+        $("#invoice-tbl").show();
+
+        /* se non ci sono dati non faccio vedere la tabella */
+        if($("#invoice-tbl tr").length < 2 ) {
+            $("#invoice-tbl").hide();
+        }
     });
 });

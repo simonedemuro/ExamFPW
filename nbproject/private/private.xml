@@ -4,6 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/fpw/NetBeansProjects/ExamFPW/src/java/it/unica/ProgettoBalneare/Servlet/AdminGetSlotCalendar.java</file>
+            <file>file:/home/fpw/NetBeansProjects/ExamFPW/web/Js/AdminHandleUser.js</file>
+            <file>file:/home/fpw/NetBeansProjects/ExamFPW/src/java/it/unica/ProgettoBalneare/Servlet/PersonalArea.java</file>
+            <file>file:/home/fpw/NetBeansProjects/ExamFPW/web/Js/AdminReservations.js</file>
             <file>file:/home/fpw/NetBeansProjects/ExamFPW/src/java/it/unica/ProgettoBalneare/Servlet/BookSlot.java</file>
         </group>
     </open-files>

@@ -15,6 +15,10 @@ and open the template in the editor.
     display: flex;
     justify-content: center;
 }
+.book-slot-section {
+    flex-direction: column;
+    align-items: center;
+}
 .show-reservations-section,
 .handle-user-section {
     flex-direction: column;
@@ -142,6 +146,9 @@ section.pers-sec .pers-sec-lvl1-col {
     height: 17px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19);
     color: #00b8ff;
+}
+.invoices-row {
+    text-align: center;
 }
 #invoice-tbl {
     padding: 3% 0 0 0;

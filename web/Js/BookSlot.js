@@ -29,6 +29,8 @@ $(function() {
             showMessage(data, 3000, false);
             /* ricarico la tabella per vedere le modifiche */
             $.post("getSlotCalendar", {"sender":"AdminDashboard"}, function (htmlOfTheCalendar) {
+                /* resetto il form */
+                $('#book-slots').trigger("reset");
                 attachCalendar(htmlOfTheCalendar);
             });
         })
